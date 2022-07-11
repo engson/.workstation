@@ -4,6 +4,8 @@ Setup of workstation on a linux machine. Includes dotfiles and binary setups
 
 ## Installation
 
+git clone in root
+
 Recommended to install binaries first.
 Pre-reqs: [asdf](https://asdf-vm.com/guide/getting-started.html)
 `asdf update` to update asdf
