@@ -21,7 +21,7 @@ asdf plugin update --all
 
 ### binaries
 
-Install tools listed in .tool-versions
+Install tools listed in .tool-versions globally
 `just install-tools`
 
 ### dotfiles
