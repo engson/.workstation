@@ -14,10 +14,14 @@ asdf plugin add just
 
 asdf install just latest
 asdf global just latest
+
+# update plugins
+asdf plugin update --all
 ```
 
 ### binaries
 
-`just install all-latest`
+Install tools listed in .tool-versions
+`just install-tools`
 
 ### dotfiles
