@@ -42,9 +42,7 @@ install-emacs-apt:
     sudo apt update
     sudo apt install {{emacs}}
 
-    ln -sfv {{justfile_directory()}}/configs/emacs ~/.config/
-
-    rm -rf ~/.emacs*
+    ln -sfv {{justfile_directory()}}/configs/emacs/ ~/.emacs.d
 
 uninstall-apt: uninstall-emacs-apt
     echo "Uninstall apt successfull"
