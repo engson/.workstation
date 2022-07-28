@@ -1,6 +1,6 @@
 #!/usr/bin/env just --justfile
 
-emacs := "emacs28"
+emacs := "emacs28-nox"
 
 _default:
     @just --list --unsorted
@@ -11,7 +11,7 @@ install-tools:
     asdf install
     cat .tool-versions | xargs -n2 bash -c 'asdf global $0 $1'
 
-install:
+install: setup-bash install-tools
     #!/bin/bash
     if command -v apt-get >/dev/null; then
         just install-apt
@@ -42,7 +42,9 @@ install-emacs-apt:
     sudo apt update
     sudo apt install {{emacs}}
 
-    ln -sf configs/emacs ~/.config/emacs
+    ln -sfv {{justfile_directory()}}/configs/emacs ~/.config/
+
+    rm -rf ~/.emacs*
 
 uninstall-apt: uninstall-emacs-apt
     echo "Uninstall apt successfull"
