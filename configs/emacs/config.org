@@ -64,7 +64,9 @@
 
 * IMPORTANT! PUT THIS IN YOUR INIT.EL 
 I don't want to use init.el to config Emacs.  
-I want to use an org file to config Emacs because I like literate configs with lots of comments.  The following code block should be your init.el.  This tells init.el to use the source code blocks from this file (config.org).
+I want to use an org file to config Emacs because I like literate configs with lots of comments.  
+The following code block should be your init.el.  
+This tells init.el to use the source code blocks from this file (config.org).
 
 #+begin_example
 (org-babel-load-file

@@ -29,7 +29,6 @@ function gititup() {
   git push
 }
 
-
 ## fzf auto-completion
 source /usr/share/doc/fzf/examples/key-bindings.bash
 
@@ -39,6 +38,3 @@ export PATH="${ANDROID_HOME}/tools:${PATH}"
 export PATH="${ANDROID_HOME}/emulator:${PATH}"
 export PATH="${ANDROID_HOME}/platform-tools:${PATH}"
 export PATH="/opt/:$PATH"
-
-##emacs
-alias emacs='emacs -nw'

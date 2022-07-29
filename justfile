@@ -1,6 +1,6 @@
 #!/usr/bin/env just --justfile
 
-emacs := "emacs"
+emacs := "emacs28"
 
 _default:
     @just --list --unsorted
@@ -42,7 +42,7 @@ install-emacs-apt:
     sudo apt update
     sudo apt install {{emacs}}
 
-    ln -sfv {{justfile_directory()}}/configs/emacs/ ~/.emacs.d
+    ln -sfv {{justfile_directory()}}/configs/emacs ~/.config/emacs
 
 uninstall-apt: uninstall-emacs-apt
     echo "Uninstall apt successfull"
