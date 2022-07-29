@@ -21,24 +21,28 @@
 - [[#dashboard][DASHBOARD]]
   - [[#configuring-dashboard][Configuring Dashboard]]
   - [[#dashboard-in-emacsclient][Dashboard in Emacsclient]]
+- [[#delete-selection-mode][DELETE SELECTION MODE]]
+- [[#elfeed][ELFEED]]
 - [[#emojis][EMOJIS]]
 - [[#file-manager-dired][FILE MANAGER (DIRED)]]
-  - [[#keybindings-to-open-dired][Keybindings To Open Dired]]
-  - [[#keybindings-within-dired][Keybindings Within Dired]]
-  - [[#keybindings-for-peep-dired-mode][Keybindings For Peep-Dired-Mode]]
 - [[#files][FILES]]
-  - [[#file-related-keybindings][File-related Keybindings]]
   - [[#installing-some-useful-file-related-modules][Installing Some Useful File-related Modules]]
   - [[#useful-file-functions][Useful File Functions]]
 - [[#fonts][FONTS]]
+  - [[#setting-the-font-face][Setting The Font Face]]
   - [[#zooming-in-and-out][Zooming In and Out]]
 - [[#general-keybindings-1][GENERAL KEYBINDINGS]]
 - [[#graphical-user-interface-tweaks][GRAPHICAL USER INTERFACE TWEAKS]]
   - [[#disable-menubar-toolbars-and-scrollbars][Disable Menubar, Toolbars and Scrollbars]]
   - [[#display-line-numbers-and-truncated-lines][Display Line Numbers and Truncated Lines]]
   - [[#change-modeline-to-dooms-modeline][Change Modeline To Doom's Modeline]]
+- [[#ivy-counselswiper][IVY (COUNSEL/SWIPER)]]
+  - [[#installing-ivy-and-basic-setup][Installing Ivy And Basic Setup]]
+  - [[#making-m-x-great-again][Making M-x Great Again!]]
+  - [[#ivy-posframe][Ivy-posframe]]
 - [[#language-support][LANGUAGE SUPPORT]]
 - [[#magit][MAGIT]]
+- [[#neotree][NEOTREE]]
 - [[#org-mode][ORG MODE]]
   - [[#defining-a-few-things][Defining A Few Things]]
   - [[#enabling-org-bullets][Enabling Org Bullets]]
@@ -51,14 +55,11 @@
   - [[#org-export-to-manpage-format][Org Export To Manpage Format]]
 - [[#perspective][PERSPECTIVE]]
 - [[#projectile][PROJECTILE]]
-- [[#registers][REGISTERS]]
 - [[#scrolling][SCROLLING]]
 - [[#shells][SHELLS]]
   - [[#eshell][Eshell]]
   - [[#vterm][Vterm]]
-- [[#splits-and-window-controls][SPLITS AND WINDOW CONTROLS]]
 - [[#theme][THEME]]
-- [[#which-key][WHICH KEY]]
 - [[#runtime-performance][RUNTIME PERFORMANCE]]
 
 * IMPORTANT! PUT THIS IN YOUR INIT.EL 
@@ -507,13 +508,13 @@ A git client for Emacs.  Often cited as a killer feature for Emacs.
   (add-to-list 'magit-git-global-arguments bare-work-tree)
   (call-interactively 'magit-status))
 
-;; if you use `me/magit-status-bare' you cant use `magit-status' on other other repos you have to unset `--git-dir' and `--work-tree'
+;; if you use `me/magit-status-bare' you cant use `magit-status' on other repos you have to unset `--git-dir' and `--work-tree'
 ;; use `me/magit-status' insted it unsets those before calling `magit-status'
 (defun me/magit-status ()
   "removes --git-dir and --work-tree in `magit-git-global-arguments' and calls `magit-status'"
   (interactive)
   (require 'magit-git)
-  (setq magit-git-global-arguments (remove bare-git-dir magit-git-global-arguments))
+  (setq magit-git-global-arguments (remove bare-git-dir magit-git-global-arments))
   (setq magit-git-global-arguments (remove bare-work-tree magit-git-global-arguments))
   (call-interactively 'magit-status))
 
@@ -555,8 +556,12 @@ Theme can be configed by setting "two" themes for neo-theme: one for the GUI and
 ;; show hidden files
 (setq-default neo-show-hidden-files t)
   
+(nvmap :prefix "SPC"
+       "t n"   '(neotree-toggle :which-key "Toggle neotree file viewer")
+       "d n"   '(neotree-dir :which-key "Open directory in neotree"))
+#+END_SRC
+  
 * ORG MODE
-Org Mode is =THE= killer feature within Emacs.  But it does need some tweaking.
 
 ** Defining A Few Things
 #+begin_src emacs-lisp
