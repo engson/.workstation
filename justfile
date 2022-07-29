@@ -1,6 +1,6 @@
 #!/usr/bin/env just --justfile
 
-emacs := "emacs28-nox"
+emacs := "emacs"
 
 _default:
     @just --list --unsorted
