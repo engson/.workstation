@@ -12,6 +12,19 @@ install-tools:
     asdf install
     cat .tool-versions | xargs -n2 bash -c 'asdf global $0 $1'
 
+install-fonts:
+    #!/bin/bash
+    FONT_HOME=~/.local/share/fonts
+
+    echo "installing fonts at $PWD to $FONT_HOME"
+    mkdir -p "$FONT_HOME/adobe-fonts/source-code-pro"   
+    (git clone \
+    --branch release \
+    --depth 1 \
+    'https://github.com/adobe-fonts/source-code-pro.git' \
+    "$FONT_HOME/adobe-fonts/source-code-pro" && \
+    fc-cache -f -v "$FONT_HOME/adobe-fonts/source-code-pro")
+
 install: setup-bash install-tools
     #!/bin/bash
     if command -v apt-get >/dev/null; then
