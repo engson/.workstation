@@ -554,6 +554,8 @@ A git client for Emacs.  Often cited as a killer feature for Emacs.
   (call-interactively 'magit-status))
 
 (use-package magit)
+(use-package forge
+  :after magit)
 #+end_src
  
 * NEOTREE
