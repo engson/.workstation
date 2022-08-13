@@ -1,6 +1,6 @@
 #!/usr/bin/env just --justfile
 
-emacs := "emacs28"
+emacs := "emacs28-nativecomp"
 
 _default:
     @just --list --unsorted
@@ -44,6 +44,7 @@ uninstall:
     else
         echo "I have no Idea what im doing here"
     fi
+    #testing
 
 install-apt: install-emacs-apt 
     #!/bin/bash
