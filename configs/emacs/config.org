@@ -273,7 +273,7 @@ An RSS newsfeed reader for Emacs.
 #+end_src
 
 * EMOJIS
-Emojify is an Emacs extension to display emojis. It can display github style emojis like :smile: or plain ascii ones like :). 
+Emojify is an Emacs extension to display emojis. It can display github style emojis like :smile: or plain ascii ones like. 
 
 #+begin_src emacs-
 (use-package emojify
@@ -433,33 +433,35 @@ Ivy, counsel and swiper are a generic completion mechanism for Emacs.  Ivy-rich 
 
 ** Installing Ivy And Basic Setup
 #+begin_src emacs-lisp
-  :config (counsel-mode))
-(use-package ivy
-  :defer 0.1
-  :diminish
-  :bind
-  (("C-c C-r" . ivy-resume)
-   ("C-x B" . ivy-switch-buffer-other-window))
-  :custom
-  (setq ivy-count-format "(%d/%d) ")
-  (setq ivy-use-virtual-buffers t)
-  (setq enable-recursive-minibuffers t)
-  :config
-  (ivy-mode))
-(use-package ivy-rich
-  :after ivy
-  :custom
-  (ivy-virtual-abbreviate 'full
-			  ivy-rich-switch-buffer-align-virtual-buffer t
-			  ivy-rich-path-style 'abbrev)
-  :config
-  (ivy-set-display-transformer 'ivy-switch-buffer
-                               'ivy-rich-switch-buffer-transformer)
-  (ivy-rich-mode 1)) ;; this gets us descriptions in M-x.
-(use-package swiper
-  :after ivy
-  :bind (("C-s" . swiper)
-         ("C-r" . swiper)))
+  (use-package counsel
+    :after ivy  
+    :config (counsel-mode))
+  (use-package ivy
+    :defer 0.1
+    :diminish
+    :bind
+    (("C-c C-r" . ivy-resume)
+     ("C-x B" . ivy-switch-buffer-other-window))
+    :custom
+    (setq ivy-count-format "(%d/%d) ")
+    (setq ivy-use-virtual-buffers t)
+    (setq enable-recursive-minibuffers t)
+    :config
+    (ivy-mode))
+  (use-package ivy-rich
+    :after ivy
+    :custom
+    (ivy-virtual-abbreviate 'full
+			    ivy-rich-switch-buffer-align-virtual-buffer t
+			    ivy-rich-path-style 'abbrev)
+    :config
+    (ivy-set-display-transformer 'ivy-switch-buffer
+				 'ivy-rich-switch-buffer-transformer)
+    (ivy-rich-mode 1)) ;; this gets us descriptions in M-x.
+  (use-package swiper
+    :after ivy
+    :bind (("C-s" . swiper)
+	   ("C-r" . swiper)))
 #+end_src
 
 ** Making M-x Great Again!
@@ -525,7 +527,10 @@ Adding packages for programming langauges, so we can have nice things like synta
 
 ** Rust
 #+begin_src emacs-lisp
-
+(use-package rust-mode
+  :ensure t)
+;; rust-analyzer is required
+(add-hook 'rust-mode-hook 'eglot-ensure)
 #+end_src
 
 * MAGIT
@@ -708,8 +713,12 @@ The Perspective package provides multiple named workspaces (or "perspectives") i
 
 #+begin_src emacs-lisp
 (use-package perspective
+  :ensure t
+  :init
+  (setq persp-mode-prefix-key (kbd "C-x w"))
   :bind
-  ("C-x C-b" . persp-list-buffers)   ; or use a nicer switcher, see below
+  ("C-x C-b" . persp-counsel-switch-buffer)   ; or use a nicer switcher, see below
+  ("C-x k" . persp-kill-buffer*)
   :config
   (persp-mode))
 #+end_src
