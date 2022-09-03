@@ -24,6 +24,12 @@ install-fonts:
     'https://github.com/adobe-fonts/source-code-pro.git' \
     "$FONT_HOME/adobe-fonts/source-code-pro" && \
     fc-cache -f -v "$FONT_HOME/adobe-fonts/source-code-pro")
+    
+    echo "Installing Ubuntu nerd font"
+    mkkdir -p "$FONT_HOME/nerd-fonts/ubuntu"
+    wget "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Ubuntu.zip" -O ~/Downloads/Ubuntu.zip
+    unzip ~/Downloads/Ubuntu.zip -d $FONT_HOME/nerd-fonts/ubuntu && rm ~/Downloads/Ubuntu.zip
+    fc-cache -fv "$FONT_HOME/nerd-fonts/ubuntu"
 
 install: setup-bash install-tools
     #!/bin/bash
@@ -46,13 +52,24 @@ uninstall:
     fi
     #testing
 
-install-apt: install-emacs-apt 
+install-apt: install-fzf install-emacs-apt
     #!/bin/bash
-    sudo apt-get install fzf
+    echo "Finished setup with apt-system"
+
+install-fzf: 
+    #!/bin/bash
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install
+
+install-emacs-dnf:
+    #!/bin/bash
+    sudo dnf copr enable deathwish/emacs-pgtk-nativecomp
+    sudo install emacs
 
 install-emacs-apt:
     #!/bin/bash
     sudo apt remove --autoremove emacs
+    sudo apt-get install software-properties-common 
     sudo add-apt-repository ppa:kelleyk/emacs
     sudo apt update
     sudo apt install {{emacs}}

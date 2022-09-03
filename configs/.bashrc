@@ -29,9 +29,6 @@ function gititup() {
   git push
 }
 
-## fzf auto-completion
-source /usr/share/doc/fzf/examples/key-bindings.bash
-
 ## Android studio
 export ANDROID_HOME=${HOME}/Android/Sdk
 export PATH="${ANDROID_HOME}/tools:${PATH}"
