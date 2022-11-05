@@ -1,5 +1,4 @@
-*
-!.gitignore
-!init.el
-!config.org
-!emacs-dash.png
+eln-cache
+.cask
+elpa
+auto-save-list

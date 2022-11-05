@@ -66,6 +66,7 @@ install-emacs-dnf:
     sudo dnf copr enable deathwish/emacs-pgtk-nativecomp
     sudo install emacs
 
+#Install emacs, setup chemas and config linking
 install-emacs-apt:
     #!/bin/bash
     sudo apt remove --autoremove emacs
@@ -74,7 +75,8 @@ install-emacs-apt:
     sudo apt update
     sudo apt install {{emacs}}
 
-    ln -sfv {{justfile_directory()}}/configs/emacs ~/.config/emacs
+    ln -sfnv {{justfile_directory()}}/configs/emacs ~/.config/
+    ln -sfnv {{justfile_directory()}}/configs/chemacs ~/.config/
 
 uninstall-apt: uninstall-emacs-apt
     echo "Uninstall apt successfull"
