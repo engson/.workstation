@@ -1,0 +1,22 @@
+#+TITLE: Emacs Configuration
+#+PROPERTY: header-args:emacs-lisp :tangle init.el
+
+This is my Emasc configuration file. Attempting to create one from scratch using elements from others(daviwil, Derek etc.).
+
+* TODO Table of Contents
+
+* Startup Performance
+Hook to measure Emacs startup time.
+#+begin_src emacs-lisp
+;; Profile emacs startup timer and gc
+(add-hook 'emacs-startup-hook
+  (lambda ()
+    (message "*** Emacs loaded in %s with %d garbage collections."
+      (format "%.2f seconds"
+        (float-time
+          (time-substract after-init-time before-init-time)))
+       gcs-done)))
+
+#+end_src
+
+* Package Management
