@@ -23,5 +23,11 @@ Install home-manager and switch to specific config
 nix run . switch
 
 #Remote
-nix run github:engson/.workstation:
+nix run github:engson/.workstation:;;;;
+
+
+#Reconfigure
+home-manager switch -f ./home.nix
 ----
+
+TODO: Fix non-default home-manager location
