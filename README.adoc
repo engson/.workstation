@@ -2,7 +2,7 @@
 
 My complete setup of workstation on a linux.
 
-== Requirements
+== Prerequisites
 - git
 
 == Installation
@@ -14,4 +14,14 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
 
 # Add flakes by editing ~/.config/nix/nix.conf with the following line to enable it:
 experimental-features = nix-command flakes
+----
+
+== Use
+Install home-manager and switch to specific config
+[source,bash]
+----
+nix run . switch
+
+#Remote
+nix run github:engson/.workstation:
 ----
