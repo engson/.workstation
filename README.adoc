@@ -28,6 +28,8 @@ nix run github:engson/.workstation:;;;;
 
 #Reconfigure
 home-manager switch -f ./home.nix
+
+home-manager switch --flake .
 ----
 
 TODO: Fix non-default home-manager location
