@@ -13,22 +13,30 @@
     };
   };
 
-  outputs = { nixpkgs, flake-utils, home-manager, ... }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = import nixpkgs { inherit system; };
-        user = "$USERNAME";
-      in {
-        defaultPackage.${system} = home-manager.defaultPackage.${system};
-        homeConfigurations.engson = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
+  outputs = { nixpkgs, home-manager, ... }:
+    let
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
+      username = "engson";
+    in {
+      defaultPackage.${system} = home-manager.defaultPackage.${system};
+      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        # Specify your home configuration modules here, for example,
+        # the path to your home.nix.
+        modules = [ 
+          ./home.nix 
+          {
+            home = {
+              username = "${username}";
+              homeDirectory = "/home/${username}";
+              stateVersion = "23.05";
+            };
+          }
+        ];
 
-          # Specify your home configuration modules here, for example,
-          # the path to your home.nix.
-          modules = [ ./home.nix ];
-
-          # Optionally use extraSpecialArgs
-          # to pass through arguments to home.nix
-        };
-      });
+        # Optionally use extraSpecialArgs
+        # to pass through arguments to home.nix
+      };
+    };
 }
