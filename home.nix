@@ -21,6 +21,7 @@
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     pkgs.cowsay
+    pkgs.neofetch
     #pkgs.hello
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
