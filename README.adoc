@@ -31,8 +31,14 @@ home-manager switch -f ./home.nix
 
 home-manager switch --flake .
 
-# Devshell
-nix develop .
+
+nix flake check
+# Devshell (not same as nix-shell)
+nix develop
+# temporary access to a package
+nix shell - run a shell in which the specified packages are available
+# debugging derivation builds and development environments
+nux develop - run a shell in which the specified packages are available
 ----
 
 TODO: Fix non-default home-manager location
