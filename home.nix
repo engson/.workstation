@@ -78,6 +78,7 @@
 
     direnv = {
       enable = true;
+      enableBashIntegration = true;
     };
 
   };

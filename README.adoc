@@ -20,17 +20,17 @@ experimental-features = nix-command flakes
 Install home-manager and switch to specific config
 [source,bash]
 ----
-# Initialize must be done first and to reconfigure
+# Initialize must be done first
 nix run . switch
 
-#Remote
 nix run github:engson/.workstation
 
 
 #Reconfigure in non-flake hm
-home-manager switch -f ./home.nix
+nix run . switch
 
-home-manager switch --flake .
+#Reconfigure flake
+nix run . switch
 
 
 nix flake check
