@@ -67,6 +67,18 @@
     # EDITOR = "emacs";
   };
 
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  programs = {
+    # Let Home Manager install and manage itself.
+    home-manager.enable = true;
+
+    tmux = {
+      enable = true;
+      historyLimit = 20000;
+    };
+
+    direnv = {
+      enable = true;
+    };
+
+  };
 }
