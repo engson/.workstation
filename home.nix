@@ -90,6 +90,7 @@
 
       aliases = {
         s = "status";
+        commit = "commit -s";
       };
     };
 
