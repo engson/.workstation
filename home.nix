@@ -83,13 +83,23 @@
 
     # TODO: add git
 
+    git = {
+      enable = true;
+      userName = "Sondre Engen";
+      userEmail = "corastweb94@hotmail.com";
+
+      aliases = {
+        s = "status";
+      };
+    };
+
     bash = {
       enable = true;
       initExtra = ''
-        if [ -f $HOME/.config/bash/.bashrc ]; then
-          source $HOME/.config/bash/.bashrc
+        if [ -f $HOME/Dev/.workstation/configs/.bashrc ]; then
+          source $HOME/Dev/.workstation/configs/.bashrc
         fi
       '';
-    };
+      };
   };
 }
