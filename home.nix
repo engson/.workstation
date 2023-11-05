@@ -81,5 +81,15 @@
       enableBashIntegration = true;
     };
 
+    # TODO: add git
+
+    bash = {
+      enable = true;
+      initExtra = ''
+        if [ -f $HOME/.config/bash/.bashrc ]; then
+          source $HOME/.config/bash/.bashrc
+        fi
+      '';
+    };
   };
 }

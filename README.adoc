@@ -23,14 +23,13 @@ Install home-manager and switch to specific config
 # Initialize must be done first
 nix run . switch
 
-nix run github:engson/.workstation
-
 
 #Reconfigure in non-flake hm
-nix run . switch
+home-manager switch --flake .
 
-#Reconfigure flake
-nix run . switch
+#Reconfigure flake after init
+nix flake update
+home-manager switch --flake .
 
 
 nix flake check
