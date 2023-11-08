@@ -74,14 +74,13 @@
     tmux = {
       enable = true;
       historyLimit = 20000;
+      terminal = "tmux-256color";
     };
 
     direnv = {
       enable = true;
       enableBashIntegration = true;
     };
-
-    # TODO: add git
 
     git = {
       enable = true;
