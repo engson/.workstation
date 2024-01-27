@@ -67,6 +67,11 @@
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
     # EDITOR = "emacs";
+    FOO = "BAR";
+  };
+
+  xdg = {
+    enable = true;
   };
 
   programs = {
@@ -100,10 +105,17 @@
     bash = {
       enable = true;
       initExtra = ''
+        . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" 
+        
         if [ -f $HOME/Dev/.workstation/configs/.bashrc ]; then
           source $HOME/Dev/.workstation/configs/.bashrc
         fi
       '';
       };
+
+    emacs = {
+      enable = true;
+      package = pkgs.emacs;  # replace with pkgs.emacs-gtk, or a version provided by the community overlay if desired.
+    };
   };
 }
