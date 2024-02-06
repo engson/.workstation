@@ -25,12 +25,13 @@
     #pkgs.hello
     pkgs.just
     pkgs.fd
+    pkgs.shellcheck
     
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+    (pkgs.nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -55,6 +56,8 @@
     # '';
   };
 
+  fonts.fontconfig.enable = true;
+
   # You can also manage environment variables but you will have to manually
   # source
   #
@@ -66,8 +69,9 @@
   #
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
+    # NOTE! Only reloads on login
     # EDITOR = "emacs";
-    FOO = "BAR";
+    DOOMDIR = "${config.xdg.configHome}/doom";
   };
 
   xdg = {
@@ -110,6 +114,8 @@
         if [ -f $HOME/Dev/.workstation/configs/.bashrc ]; then
           source $HOME/Dev/.workstation/configs/.bashrc
         fi
+
+        export PATH=$XDG_CONFIG_HOME/emacs/bin:$PATH
       '';
       };
 

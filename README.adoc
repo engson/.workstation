@@ -16,6 +16,9 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
 experimental-features = nix-command flakes
 ----
 
+== Home manager config helps
+
+
 == Use
 Install home-manager and switch to specific config
 [source,bash]
