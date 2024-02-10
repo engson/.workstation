@@ -79,5 +79,5 @@ alias la='ls -A'
 alias l='ls -CF'
 
 function squash(){
-    git reset --soft $(git merge-base master HEAD)
+    git reset --soft $(git merge-base main HEAD)
 }
