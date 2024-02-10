@@ -1,0 +1,82 @@
+= .workstation
+
+My complete setup of workstation on a linux.
+
+== Prerequisites
+- git (Will use home-manager git after install)
+
+== Installation
+
+[source,bash]
+----
+# Install nix
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+
+# Add flakes by editing ~/.config/nix/nix.conf with the following line to enable it:
+experimental-features = nix-command flakes
+----
+
+== Home manager config helps
+
+
+== Use
+Install home-manager and switch to specific config
+[source,bash]
+----
+# Initialize must be done first
+nix run . switch
+
+
+#Reconfigure in non-flake hm
+home-manager switch --flake .
+
+#Reconfigure flake after init
+nix flake update
+home-manager switch --flake .
+
+
+nix flake check
+# Devshell (not same as nix-shell)
+nix develop
+# temporary access to a package
+nix shell - run a shell in which the specified packages are available
+# debugging derivation builds and development environments
+nux develop - run a shell in which the specified packages are available
+----
+
+== Secrets
+[source,bash]
+----
+mkdir -p ~/.config/sops/age
+# Generate private and public key
+nix shell nixpkgs#age -c age-keygen -o ~/.config/sops/age/keys.txt
+# Get public key
+nix shell nixpkgs#age -c age-keygen -y ~/.config/sops/age/keys.txt
+----
+
+TODO: Fix non-default home-manager location
+
+== Flakes
+[source,bash]
+----
+nix flake archive - copy a flake and all its inputs to a store 
+nix flake check - check whether the flake evaluates and run its tests 
+nix flake clone - clone flake repository 
+nix flake info - show flake metadata 
+nix flake init - create a flake in the current directory from a template 
+nix flake lock - create missing lock file entries 
+nix flake metadata - show flake metadata 
+nix flake new - create a flake in the specified directory from a template 
+nix flake prefetch - download the source tree denoted by a flake reference into the Nix store 
+nix flake show - show the outputs provided by a flake 
+nix flake update - update flake lock file 
+----
+
+== Common issues
+.flake issues
+[source,bash]
+----
+warning: Git tree '/home/engson/Dev/aoc' is dirty
+error: getting status of '/nix/store/bhrlvs829n0bgg5c2b1q41vysnka9w07-source/2023': No such file or director
+# Simply make sure flake is  git committed. Otherwise ignored.
+----
