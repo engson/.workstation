@@ -3,12 +3,12 @@
 
   inputs = {
     # Software source
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     # Flake util functions
     flake-utils.url = "github:numtide/flake-utils";
     # Manages configs and software install by symlinking
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -24,12 +24,12 @@
         inherit pkgs;
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
-        modules = [ 
+        modules = [
           {
             home = {
               username = "${username}";
               homeDirectory = "/home/${username}";
-              stateVersion = "23.05";
+              stateVersion = "23.11";
             };
           }
           ./home.nix 
