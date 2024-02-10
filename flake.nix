@@ -23,7 +23,7 @@
         "x86_86-linux"
       ];
       username = "engson";
-      forAllSystems = nixpkgs.lib.gemAttrs systems;
+      forAllSystems = nixpkgs.lib.genAttrs systems;
     in {
       # Your custom packages
       # Accessible through 'nix build', 'nix shell', etc
@@ -36,7 +36,7 @@
       overlays = import ./overlays {inherit inputs;};
 
       homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
-        pkgs = forAllSystems (system: nixpkgs.legacyPackages.${system});
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
         # Specify your home configuration modules here, for example,
         extraSpecialArgs = {inherit inputs outputs;};
 
