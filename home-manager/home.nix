@@ -92,6 +92,16 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+    
+    # Doom emacs 
+    # https://bhankas.org/blog/deploying_doom_emacs_config_via_nixos_home_manager/
+    doom = {
+      enable = true;
+      executable = false;
+      recursive = true;
+      source = ../configs/doom;
+      target = "${config.xdg.configHome}/doom";
+    };
   };
 
   fonts.fontconfig.enable = true;
