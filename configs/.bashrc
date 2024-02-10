@@ -77,3 +77,7 @@ export PATH="/opt/:$PATH"
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+
+function squash(){
+    git reset --soft $(git merge-base master HEAD)
+}
