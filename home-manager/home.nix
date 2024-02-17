@@ -64,6 +64,7 @@
     pkgs.just
     pkgs.fd
     pkgs.shellcheck
+    pkgs.which
     
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -103,6 +104,15 @@
       target = "${config.xdg.configHome}/doom";
     };
   };
+
+  # home.activation.doom = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  #   if [ -x "${config.xdg.configHome}/emacs/bin/doom" ]; then
+  #     env
+  #     pwd
+  #     "${pkgs.which}/bin/which" emacs
+  #     "${config.xdg.configHome}/emacs/bin/doom" sync
+  #   fi
+  #   '';
 
   fonts.fontconfig.enable = true;
 
