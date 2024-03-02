@@ -35,7 +35,10 @@
       # Your custom packages and modifications, exported as overlays
       overlays = import ./overlays {inherit inputs;};
 
-      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
+      # Standalone home-manager configuration entrypoint
+      # Available through 'home-manager --flake .#your-username@your-hostname'
+      homeConfigurations = {
+        "${username}" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         # Specify your home configuration modules here, for example,
         extraSpecialArgs = {inherit inputs outputs;};
@@ -51,9 +54,7 @@
           }
           ./home-manager/home.nix 
         ];
-
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
       };
     };
+  };
 }

@@ -67,7 +67,6 @@
     pkgs.which
 
     # Work related packages 
-    pkgs.mediawriter
     
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -138,6 +137,8 @@
   xdg = {
     enable = true;
   };
+
+  # targets.genericLinux.enable = true;
 
   programs = {
     # Let Home Manager install and manage itself.
