@@ -66,6 +66,9 @@
     pkgs.shellcheck
     pkgs.which
 
+    pkgs.htop
+
+    pkgs.nixfmt
     # Work related packages 
     
     # # It is sometimes useful to fine-tune packages, for example, by applying
@@ -95,7 +98,6 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-    
     # Doom emacs 
     # https://bhankas.org/blog/deploying_doom_emacs_config_via_nixos_home_manager/
     doom = {
