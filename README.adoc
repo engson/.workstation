@@ -34,7 +34,7 @@ home-manager switch --flake .
 nix flake update
 home-manager switch --flake .
 
-home-manager switch --flake engson@desktop
+home-manager switch --flake .#engson@desktop
 
 
 nix flake check

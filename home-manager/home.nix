@@ -136,9 +136,10 @@
 
   xdg = {
     enable = true;
+    mime.enable = true;
   };
 
-  # targets.genericLinux.enable = true;
+  targets.genericLinux.enable = true;
 
   programs = {
     # Let Home Manager install and manage itself.
@@ -179,7 +180,8 @@
 
         export PATH=$XDG_CONFIG_HOME/emacs/bin:$PATH
       '';
-      };
+      profileExtra = "export XDG_DATA_DIRS=\"$HOME/.nix-profile/share:$XDG_DATA_DIRS\"";
+    };
 
     emacs = {
       enable = true;

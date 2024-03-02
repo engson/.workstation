@@ -33,11 +33,16 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+# 'Safe' version of __git_ps1 to avoid errors on systems that don't have it
+function gitPrompt {
+    command -v __git_ps1 > /dev/null && __git_ps1 " (%s)"
+}
+
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\033[0;32m$(__git_ps1 " (%s)")\033[0m\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\033[0;32m$(gitPrompt)\033[0m\$ '
 
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(__git_ps1 " (%s)")\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(gitPrompt)\$ '
 fi
 unset color_prompt force_color_prompt
 
