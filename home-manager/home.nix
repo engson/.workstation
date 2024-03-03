@@ -67,6 +67,8 @@
     pkgs.which
     pkgs.bat
 
+    pkgs.gh
+
     pkgs.btop
     pkgs.pandoc
     pkgs.asciidoctor

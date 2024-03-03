@@ -55,6 +55,20 @@
           ./home-manager/home.nix 
         ];
       };
+      "${username}@work" = home-manager.lib.homeMamangerConfiguration {
+        pkgs = nixpkgs.legacyPacakges.x86_64-linux;
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [
+          {
+            home = {
+              username = "${username}";
+              homeDirectory = "/home/${username}";
+              stateVersion = "23.11";
+            };
+          }
+          ./home-manager/home.nix
+        ];
+      };
     };
   };
 }
