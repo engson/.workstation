@@ -74,3 +74,16 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+;; Custom settings after this line
+;; Permanent workspace display
+(after! persp-mode
+  (defun display-workspaces-in-minibuffer ()
+    (with-current-buffer " *Minibuf-0*"
+      (erase-buffer)
+      (insert (+workspace--tabline))))
+  (run-with-idle-timer 1 t #'display-workspaces-in-minibuffer)
+  (+workspace/display))
+
+;; Use rainbow-delimiters in all prog-modes
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)

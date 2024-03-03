@@ -65,8 +65,11 @@
     pkgs.fd
     pkgs.shellcheck
     pkgs.which
+    pkgs.bat
 
-    pkgs.htop
+    pkgs.btop
+    pkgs.pandoc
+    pkgs.asciidoctor
 
     pkgs.nixfmt
     # Work related packages 
