@@ -1,5 +1,4 @@
-{ inputs, outputs, lib, config, pkgs, ... }:
-{
+{ inputs, outputs, lib, config, pkgs, ... }: {
   # You can import other home-manager modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/home-manager):
@@ -10,6 +9,7 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
+    ../home/engson/features/ripgrep
   ];
 
   nixpkgs = {
@@ -43,7 +43,6 @@
   # home.username = "${username}";
   # home.homeDirectory = "/home/${username}";
 
-
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -74,8 +73,8 @@
     pkgs.asciidoctor
 
     pkgs.nixfmt
-    # Work related packages 
-    
+    # Work related packages
+
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -103,7 +102,7 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-    # Doom emacs 
+    # Doom emacs
     # https://bhankas.org/blog/deploying_doom_emacs_config_via_nixos_home_manager/
     doom = {
       enable = true;
@@ -174,25 +173,25 @@
       };
     };
 
-    ripgrep.enable = true;
-
     bash = {
       enable = true;
       initExtra = ''
-        . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" 
-        
+        . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+
         if [ -f $HOME/Dev/.workstation/configs/.bashrc ]; then
           source $HOME/Dev/.workstation/configs/.bashrc
         fi
 
         export PATH=$XDG_CONFIG_HOME/emacs/bin:$PATH
       '';
-      profileExtra = "export XDG_DATA_DIRS=\"$HOME/.nix-profile/share:$XDG_DATA_DIRS\"";
+      profileExtra =
+        ''export XDG_DATA_DIRS="$HOME/.nix-profile/share:$XDG_DATA_DIRS"'';
     };
 
     emacs = {
       enable = true;
-      package = pkgs.emacs;  # replace with pkgs.emacs-gtk, or a version provided by the community overlay if desired.
+      package =
+        pkgs.emacs; # replace with pkgs.emacs-gtk, or a version provided by the community overlay if desired.
     };
   };
 }
