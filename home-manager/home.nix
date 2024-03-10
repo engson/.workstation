@@ -1,6 +1,43 @@
-{ config, pkgs, ... }:
+{ inputs, outputs, lib, config, pkgs, ... }: {
+  # You can import other home-manager modules here
+  imports = [
+    # If you want to use modules your own flake exports (from modules/home-manager):
+    # outputs.homeManagerModules.example
 
-{
+    # Or modules exported from other flakes (such as nix-colors):
+    # inputs.nix-colors.homeManagerModules.default
+
+    # You can also split up your configuration and import pieces of it here:
+    # ./nvim.nix
+    # ../home/engson/features/ripgrep
+  ];
+
+  nixpkgs = {
+    # You can add overlays here
+    overlays = [
+      # Add overlays your own flake exports (from overlays and pkgs dir):
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.unstable-packages
+
+      # You can also add overlays exported from other flakes:
+      # neovim-nightly-overlay.overlays.default
+
+      # Or define it inline, for example:
+      # (final: prev: {
+      #   hi = final.hello.overrideAttrs (oldAttrs: {
+      #     patches = [ ./change-hello-to-hi.patch ];
+      #   });
+      # })
+    ];
+    # Configure your nixpkgs instance
+    config = {
+      # Disable if you don't want unfree packages
+      allowUnfree = true;
+      # Workaround for https://github.com/nix-community/home-manager/issues/2942
+      allowUnfreePredicate = _: true;
+    };
+  };
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   # home.username = "${username}";
@@ -26,7 +63,18 @@
     pkgs.just
     pkgs.fd
     pkgs.shellcheck
-    
+    pkgs.which
+    pkgs.bat
+
+    pkgs.gh
+
+    pkgs.btop
+    pkgs.pandoc
+    pkgs.asciidoctor
+
+    pkgs.nixfmt
+    # Work related packages
+
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -54,7 +102,25 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+    # Doom emacs
+    # https://bhankas.org/blog/deploying_doom_emacs_config_via_nixos_home_manager/
+    doom = {
+      enable = true;
+      executable = false;
+      recursive = true;
+      source = ../configs/doom;
+      target = "${config.xdg.configHome}/doom";
+    };
   };
+
+  # home.activation.doom = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  #   if [ -x "${config.xdg.configHome}/emacs/bin/doom" ]; then
+  #     env
+  #     pwd
+  #     "${pkgs.which}/bin/which" emacs
+  #     "${config.xdg.configHome}/emacs/bin/doom" sync
+  #   fi
+  #   '';
 
   fonts.fontconfig.enable = true;
 
@@ -76,7 +142,10 @@
 
   xdg = {
     enable = true;
+    mime.enable = true;
   };
+
+  targets.genericLinux.enable = true;
 
   programs = {
     # Let Home Manager install and manage itself.
@@ -104,24 +173,25 @@
       };
     };
 
-    ripgrep.enable = true;
-
     bash = {
       enable = true;
       initExtra = ''
-        . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" 
-        
+        . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+
         if [ -f $HOME/Dev/.workstation/configs/.bashrc ]; then
           source $HOME/Dev/.workstation/configs/.bashrc
         fi
 
         export PATH=$XDG_CONFIG_HOME/emacs/bin:$PATH
       '';
-      };
+      profileExtra =
+        ''export XDG_DATA_DIRS="$HOME/.nix-profile/share:$XDG_DATA_DIRS"'';
+    };
 
     emacs = {
       enable = true;
-      package = pkgs.emacs;  # replace with pkgs.emacs-gtk, or a version provided by the community overlay if desired.
+      package =
+        pkgs.emacs; # replace with pkgs.emacs-gtk, or a version provided by the community overlay if desired.
     };
   };
 }

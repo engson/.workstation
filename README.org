@@ -1,28 +1,38 @@
-= .workstation
+#+title: .workstation
+
+#+date: 2024-03-02
 
 My complete setup of workstation on a linux.
 
-== Prerequisites
+* Prerequisites
+:PROPERTIES:
+:CUSTOM_ID: _prerequisites
+:END:
 - git (Will use home-manager git after install)
 
-== Installation
-
-[source,bash]
-----
+* Installation
+:PROPERTIES:
+:CUSTOM_ID: _installation
+:END:
+#+begin_src sh
 # Install nix
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 
 # Add flakes by editing ~/.config/nix/nix.conf with the following line to enable it:
 experimental-features = nix-command flakes
-----
+#+end_src
 
-== Home manager config helps
-
-
-== Use
+* Home manager config helps
+:PROPERTIES:
+:CUSTOM_ID: _home_manager_config_helps
+:END:
+* Use
+:PROPERTIES:
+:CUSTOM_ID: _use
+:END:
 Install home-manager and switch to specific config
-[source,bash]
-----
+
+#+begin_src sh
 # Initialize must be done first
 nix run . switch
 
@@ -44,44 +54,55 @@ nix develop
 nix shell - run a shell in which the specified packages are available
 # debugging derivation builds and development environments
 nux develop - run a shell in which the specified packages are available
-----
+#+end_src
 
-== Secrets
-[source,bash]
-----
+* Secrets
+:PROPERTIES:
+:CUSTOM_ID: _secrets
+:END:
+#+begin_src sh
 mkdir -p ~/.config/sops/age
 # Generate private and public key
 nix shell nixpkgs#age -c age-keygen -o ~/.config/sops/age/keys.txt
 # Get public key
 nix shell nixpkgs#age -c age-keygen -y ~/.config/sops/age/keys.txt
-----
+#+end_src
 
 TODO: Fix non-default home-manager location
 
-== Flakes
-[source,bash]
-----
-nix flake archive - copy a flake and all its inputs to a store 
-nix flake check - check whether the flake evaluates and run its tests 
-nix flake clone - clone flake repository 
-nix flake info - show flake metadata 
-nix flake init - create a flake in the current directory from a template 
-nix flake lock - create missing lock file entries 
-nix flake metadata - show flake metadata 
-nix flake new - create a flake in the specified directory from a template 
-nix flake prefetch - download the source tree denoted by a flake reference into the Nix store 
-nix flake show - show the outputs provided by a flake 
-nix flake update - update flake lock file 
-----
+* Flakes
+:PROPERTIES:
+:CUSTOM_ID: _flakes
+:END:
+#+begin_src sh
+nix flake archive - copy a flake and all its inputs to a store
+nix flake check - check whether the flake evaluates and run its tests
+nix flake clone - clone flake repository
+nix flake info - show flake metadata
+nix flake init - create a flake in the current directory from a template
+nix flake lock - create missing lock file entries
+nix flake metadata - show flake metadata
+nix flake new - create a flake in the specified directory from a template
+nix flake prefetch - download the source tree denoted by a flake reference into the Nix store
+nix flake show - show the outputs provided by a flake
+nix flake update - update flake lock file
+#+end_src
 
-== Common issues
-.flake issues
-[source,bash]
-----
+* Common issues
+:PROPERTIES:
+:CUSTOM_ID: _common_issues
+:END:
+
+*flake issues*
+
+#+begin_src sh
 warning: Git tree '/home/engson/Dev/aoc' is dirty
 error: getting status of '/nix/store/bhrlvs829n0bgg5c2b1q41vysnka9w07-source/2023': No such file or director
 # Simply make sure flake is  git committed. Otherwise ignored.
-----
+#+end_src
 
-== References
-https://github.com/Misterio77/nix-starter-configs.git
+* References
+:PROPERTIES:
+:CUSTOM_ID: _references
+:END:
+[[https://github.com/Misterio77/nix-starter-configs.git]]
