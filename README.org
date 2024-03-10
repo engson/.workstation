@@ -9,6 +9,7 @@ My complete setup of workstation on a linux.
 :CUSTOM_ID: _prerequisites
 :END:
 - git (Will use home-manager git after install)
+- curl
 
 * Installation
 :PROPERTIES:
