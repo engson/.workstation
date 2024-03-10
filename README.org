@@ -10,8 +10,7 @@ My complete setup of workstation on a linux.
 :END:
 - git (Will use home-manager git after install)
 - curl
-
-* Installation
+- nix with flakes
 :PROPERTIES:
 :CUSTOM_ID: _installation
 :END:
@@ -21,6 +20,22 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
 
 # Add flakes by editing ~/.config/nix/nix.conf with the following line to enable it:
 experimental-features = nix-command flakes
+#+end_src
+
+* Init
+How to install from fresh system, after completing Prerequisites
+
+#+begin_src
+nix run github:engson/.workstation#username@server
+#+end_src
+
+#+begin_src shell
+
+# Start shell with home-manager
+nix shell nixpkgs#home-manager
+
+home-manager switch --flake github:engson/.workstation#username@server
+
 #+end_src
 
 * Home manager config helps
