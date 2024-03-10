@@ -111,6 +111,14 @@
       source = ../configs/doom;
       target = "${config.xdg.configHome}/doom";
     };
+
+    bashrc = {
+      enable = true;
+      executable = true;
+      recursive = false;
+      source = ../configs/.bashrc;
+      target = "${config.xdg.configHome}/.bashrc";
+    };
   };
 
   # home.activation.doom = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -178,8 +186,8 @@
       initExtra = ''
         . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 
-        if [ -f $HOME/Dev/.workstation/configs/.bashrc ]; then
-          source $HOME/Dev/.workstation/configs/.bashrc
+        if [ -f $XDG_CONFIG_HOME/.bashrc ]; then
+          source $XDG_CONFIG_HOME/.bashrc
         fi
 
         export PATH=$XDG_CONFIG_HOME/emacs/bin:$PATH
