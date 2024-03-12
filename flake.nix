@@ -14,6 +14,8 @@
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Devenv for easy setup of development environments
+    devenv.url = "github:cachix/devenv/latest";
   };
 
   outputs = { self, nixpkgs, home-manager, ... } @ inputs:
