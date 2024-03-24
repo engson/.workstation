@@ -75,6 +75,9 @@
     pkgs.nixfmt
     # Work related packages
 
+    # Devenv packages
+    pkgs.cachix
+    inputs.devenv.packages."${pkgs.system}".devenv
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -110,6 +113,14 @@
       recursive = true;
       source = ../configs/doom;
       target = "${config.xdg.configHome}/doom";
+    };
+
+    bashrc = {
+      enable = true;
+      executable = true;
+      recursive = false;
+      source = ../configs/.bashrc;
+      target = "${config.xdg.configHome}/.bashrc";
     };
   };
 
@@ -178,8 +189,8 @@
       initExtra = ''
         . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 
-        if [ -f $HOME/Dev/.workstation/configs/.bashrc ]; then
-          source $HOME/Dev/.workstation/configs/.bashrc
+        if [ -f $XDG_CONFIG_HOME/.bashrc ]; then
+          source $XDG_CONFIG_HOME/.bashrc
         fi
 
         export PATH=$XDG_CONFIG_HOME/emacs/bin:$PATH
