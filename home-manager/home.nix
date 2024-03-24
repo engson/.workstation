@@ -78,12 +78,14 @@
     # Devenv packages
     pkgs.cachix
     inputs.devenv.packages."${pkgs.system}".devenv
+
+    # Doome emacs stuffs
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
     (pkgs.nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
-
+    pkgs.emacs29
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
     # # environment:
@@ -199,10 +201,5 @@
         ''export XDG_DATA_DIRS="$HOME/.nix-profile/share:$XDG_DATA_DIRS"'';
     };
 
-    emacs = {
-      enable = false;
-      #package =
-      #  pkgs.emacs; # replace with pkgs.emacs-gtk, or a version provided by the community overlay if desired.
-    };
   };
 }
