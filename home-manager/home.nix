@@ -200,7 +200,7 @@
     };
 
     emacs = {
-      enable = true;
+      enable = false;
       package =
         pkgs.emacs; # replace with pkgs.emacs-gtk, or a version provided by the community overlay if desired.
     };
