@@ -201,8 +201,8 @@
 
     emacs = {
       enable = false;
-      package =
-        pkgs.emacs; # replace with pkgs.emacs-gtk, or a version provided by the community overlay if desired.
+      #package =
+      #  pkgs.emacs; # replace with pkgs.emacs-gtk, or a version provided by the community overlay if desired.
     };
   };
 }
