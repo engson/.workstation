@@ -22,6 +22,8 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
 experimental-features = nix-command flakes
 #+end_src
 
+#+RESULTS:
+
 * Init
 How to install from fresh system, after completing Prerequisites
 
@@ -33,6 +35,7 @@ nix run github:engson/.workstation#username@server
 
 # Start shell with home-manager
 nix shell nixpkgs#home-manager
+nix shell github:nix-community/home-manager/release-23.11
 
 home-manager switch --flake github:engson/.workstation#username@server
 
