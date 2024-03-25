@@ -171,7 +171,7 @@
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
     emacs = {
-      enabled = true;
+      enable = true;
       package = pkgs.emacs29;
     };
 
