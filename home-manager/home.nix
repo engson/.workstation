@@ -175,7 +175,7 @@
         ;; Set eln-cache dir
         (when (boundp 'native-comp-eln-load-path)
           (startup-redirect-eln-cache (expand-file-name "~/.emacs.d/eln-cache/" user-emacs-directory)))
-        ;;(make-symbolic-link ".config/emacs" "~/.emacs.d")
+        (make-symbolic-link ".config/emacs" "~/.emacs.d")
       '';
     };
 
