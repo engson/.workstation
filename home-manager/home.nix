@@ -85,7 +85,6 @@
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
     (pkgs.nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
-    pkgs.emacs29
     pkgs.ripgrep
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -110,12 +109,15 @@
     # '';
     # Doom emacs
     # https://bhankas.org/blog/deploying_doom_emacs_config_via_nixos_home_manager/
-    doom = {
+    doomConfig = {
       enable = true;
       executable = false;
       recursive = true;
       source = ../configs/doom;
       target = "${config.xdg.configHome}/doom";
+    };
+    doom = {
+      source = builtins.fetchGit "https://github.com/hlissner/doom-emacs";
     };
 
     bashrc = {
@@ -147,6 +149,10 @@
   #
   #  /etc/profiles/per-user/engson/etc/profile.d/hm-session-vars.sh
   #
+  home.sessionPath = [
+    "${config.xdg.configHome}/emacs/bin"
+
+  ];
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
     # NOTE! Only reloads on login
@@ -164,6 +170,10 @@
   programs = {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
+    emacs = {
+      enabled = true;
+      package = pkgs.emacs29;
+    };
 
     tmux = {
       enable = true;
@@ -195,8 +205,6 @@
         if [ -f $XDG_CONFIG_HOME/.bashrc ]; then
           source $XDG_CONFIG_HOME/.bashrc
         fi
-
-        export PATH=$XDG_CONFIG_HOME/emacs/bin:$PATH
       '';
       profileExtra =
         ''export XDG_DATA_DIRS="$HOME/.nix-profile/share:$XDG_DATA_DIRS"'';
