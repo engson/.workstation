@@ -86,7 +86,7 @@
     # # fonts?
     (pkgs.nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
     pkgs.emacs29
-    pkgs.rg
+    pkgs.ripgrep
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
     # # environment:
