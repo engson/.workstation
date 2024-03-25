@@ -76,8 +76,8 @@
     # Work related packages
 
     # Devenv packages
-    pkgs.cachix
-    inputs.devenv.packages."${pkgs.system}".devenv
+    #pkgs.cachix
+    #inputs.devenv.packages."${pkgs.system}".devenv
 
     # Doome emacs stuffs
     # # It is sometimes useful to fine-tune packages, for example, by applying

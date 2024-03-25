@@ -40,7 +40,7 @@
       # Standalone home-manager configuration entrypoint
       # Available through 'home-manager --flake .#your-username@your-hostname'
       homeConfigurations = {
-        "${username}@desktop" = home-manager.lib.homeManagerConfiguration {
+        "desktop" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         # Specify your home configuration modules here, for example,
         extraSpecialArgs = {inherit inputs outputs;};
