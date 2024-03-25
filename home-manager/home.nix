@@ -116,9 +116,6 @@
       source = ../configs/doom;
       target = "${config.xdg.configHome}/doom";
     };
-    doom = {
-      source = builtins.fetchGit "https://github.com/hlissner/doom-emacs";
-    };
 
     bashrc = {
       enable = true;
