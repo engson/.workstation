@@ -170,6 +170,9 @@
     emacs = {
       enable = true;
       package = pkgs.emacs29;
+      extraConfig = ''
+        (make-symbolic-link ".config/emacs" "~/.emacs.d")
+      '';
     };
 
     tmux = {
