@@ -36,8 +36,12 @@ nix shell nixpkgs#home-manager
 
 home-manager switch --flake github:engson/.workstation#username@server
 
+home-manager switch --flake github:engson/.workstation#engson@desktop
 # to select specific branch
 home-manager switch --flake github:engson/.workstation/<branch>#username@server
+
+home-manager switch --flake github:engson/.workstation/mod#engson@desktop
+
 #+end_src
 
 * Home manager config helps
