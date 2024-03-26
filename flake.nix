@@ -1,4 +1,5 @@
 {
+  # TODO: Create way to not need home-manager to switch on first install
   description = "My Home Manager flake";
 
   inputs = {

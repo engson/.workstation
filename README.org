@@ -32,19 +32,8 @@ nix run github:engson/.workstation#username@server
 #+end_src
 
 #+begin_src shell
-
-# Start shell with home-manager
-nix shell nixpkgs#home-manager
-nix shell github:nix-community/home-manager/release-23.11
-
-home-manager switch --flake github:engson/.workstation#username@server
-
-home-manager switch --flake github:engson/.workstation#engson@desktop
-# to select specific branch
-home-manager switch --flake github:engson/.workstation/<branch>#username@server
-
-home-manager switch --flake github:engson/.workstation/mod#engson@desktop
-
+nix run home-manager/release-23.11 -- switch --flake github:engson/.workstation/mod#personal
+nix run home-manager/release-23.11 -- switch --flake github:engson/.workstation/<branch>#<profile>
 #+end_src
 
 * Home manager config helps
@@ -58,19 +47,13 @@ home-manager switch --flake github:engson/.workstation/mod#engson@desktop
 Install home-manager and switch to specific config
 
 #+begin_src sh
-# Initialize must be done first
-nix run . switch
+# Reconfigure locally
+home-manager switch --flake .<profile>
 
-
-#Reconfigure in non-flake hm
-home-manager switch --flake .
-
-#Reconfigure flake after init
+home-manager switch --flake github:engson/.workstation#<profile>
+home-manager switch --flake github:engson/.workstation/<branch>#<profile>
+#Update nix flake
 nix flake update
-home-manager switch --flake .
-
-home-manager switch --flake .#engson@desktop
-
 
 nix flake check
 # Devshell (not same as nix-shell)
