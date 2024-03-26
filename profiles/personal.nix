@@ -9,10 +9,10 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
-    # ../home/engson/features/ripgrep
     ../modules/cli/cowsay
     ../modules/cli/tmux
     ../modules/cli/bash
+    ../modules/emacs
   ];
 
   nixpkgs = {
@@ -73,20 +73,16 @@
     pkgs.pandoc
     pkgs.asciidoctor
 
-    pkgs.nixfmt
     # Work related packages
 
     # Devenv packages
     #pkgs.cachix
     #inputs.devenv.packages."${pkgs.system}".devenv
 
-    # Doome emacs stuffs
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
-    (pkgs.nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
-    pkgs.ripgrep
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
     # # environment:
@@ -108,15 +104,7 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-    # Doom emacs
     # https://bhankas.org/blog/deploying_doom_emacs_config_via_nixos_home_manager/
-    doomConfig = {
-      enable = true;
-      executable = false;
-      recursive = true;
-      source = ../modules/emacs/doom;
-      target = "${config.xdg.configHome}/doom";
-    };
   };
 
   # home.activation.doom = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -128,8 +116,6 @@
   #   fi
   #   '';
 
-  fonts.fontconfig.enable = true;
-
   # You can also manage environment variables but you will have to manually
   # source
   #
@@ -139,15 +125,11 @@
   #
   #  /etc/profiles/per-user/engson/etc/profile.d/hm-session-vars.sh
   #
-  home.sessionPath = [
-    "${config.xdg.configHome}/emacs/bin"
 
-  ];
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
     # NOTE! Only reloads on login
     # EDITOR = "emacs";
-    # DOOMDIR = "${config.xdg.configHome}/doom";
   };
 
   xdg = {
@@ -160,16 +142,6 @@
   programs = {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
-    emacs = {
-      enable = true;
-      package = pkgs.emacs29;
-      extraConfig = ''
-        (setq user-emacs-directory "~/.config/emacs")
-        ;; Set eln-cache dir
-        (when (boundp 'native-comp-eln-load-path)
-          (startup-redirect-eln-cache (expand-file-name "~/.emacs.d/eln-cache/" user-emacs-directory)))
-      '';
-    };
 
     direnv = {
       enable = true;
