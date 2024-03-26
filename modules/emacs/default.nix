@@ -2,7 +2,7 @@
 {
   # https://bhankas.org/blog/deploying_doom_emacs_config_via_nixos_home_manager/
   programs.emacs = {
-    enabled = true;
+    enable = true;
     package = pkgs.emacs29;
     extraConfig = ''
       (setq user-emacs-directory "~/.config/emacs")
