@@ -5,10 +5,10 @@
     enable = true;
     package = pkgs.emacs29;
     extraConfig = ''
-      (setq user-emacs-directory "~/.config/emacs")
+      ;;(setq user-emacs-directory "~/.config/emacs")
       ;; Set eln-cache dir
-      (when (boundp 'native-comp-eln-load-path)
-        (startup-redirect-eln-cache (expand-file-name "~/.emacs.d/eln-cache/" user-emacs-directory)))
+      ;;(when (boundp 'native-comp-eln-load-path)
+      ;; (startup-redirect-eln-cache (expand-file-name "~/.emacs.d/eln-cache/" user-emacs-directory)))
       '';
   };
 
