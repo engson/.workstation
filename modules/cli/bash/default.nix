@@ -16,7 +16,6 @@
       if [ -f $XDG_CONFIG_HOME/.bashrc ]; then
         source $XDG_CONFIG_HOME/.bashrc
       fi
-      export FOO="test"
     '';
     profileExtra =
       ''export XDG_DATA_DIRS="$HOME/.nix-profile/share:$XDG_DATA_DIRS"'';
