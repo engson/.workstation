@@ -4,7 +4,7 @@
     enable = true;
     executable = true;
     recursive = false;
-    source = ../modules/cli/bash/.bashrc;
+    source = ".bashrc";
     target = "${config.xdg.configHome}/.bashrc";
   };
 
