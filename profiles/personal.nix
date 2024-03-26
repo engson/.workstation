@@ -114,7 +114,7 @@
       enable = true;
       executable = false;
       recursive = true;
-      source = ../configs/doom;
+      source = ../modules/emacs/doom;
       target = "${config.xdg.configHome}/doom";
     };
 
@@ -155,7 +155,7 @@
   home.sessionVariables = {
     # NOTE! Only reloads on login
     # EDITOR = "emacs";
-    DOOMDIR = "${config.xdg.configHome}/doom";
+    # DOOMDIR = "${config.xdg.configHome}/doom";
   };
 
   xdg = {
