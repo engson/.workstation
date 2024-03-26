@@ -11,6 +11,7 @@
     # ./nvim.nix
     # ../home/engson/features/ripgrep
     ../modules/cli/cowsay
+    ../modules/cli/tmux
   ];
 
   nixpkgs = {
@@ -179,12 +180,6 @@
       '';
     };
 
-    tmux = {
-      enable = true;
-      historyLimit = 20000;
-      terminal = "tmux-256color";
-    };
-
     direnv = {
       enable = true;
       enableBashIntegration = true;
@@ -213,6 +208,5 @@
       profileExtra =
         ''export XDG_DATA_DIRS="$HOME/.nix-profile/share:$XDG_DATA_DIRS"'';
     };
-
   };
 }
