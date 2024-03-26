@@ -14,7 +14,7 @@
 
   home.file = {
     doom = {
-      enabled = true;
+      enable = true;
       executable = false;
       recursive = false;
       source = ./doom;
