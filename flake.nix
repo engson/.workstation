@@ -68,7 +68,7 @@
               stateVersion = "23.11";
             };
           }
-          ./home-manager/home.nix
+          ./profiles/work.nix
         ];
       };
     };

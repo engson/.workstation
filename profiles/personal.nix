@@ -57,7 +57,7 @@
   home.packages = [
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
-    pkgs.cowsay
+    # pkgs.cowsay
     pkgs.neofetch
     #pkgs.hello
     pkgs.just
