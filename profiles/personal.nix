@@ -122,7 +122,7 @@
       enable = true;
       executable = true;
       recursive = false;
-      source = ../configs/.bashrc;
+      source = ../modules/cli/bash/.bashrc;
       target = "${config.xdg.configHome}/.bashrc";
     };
   };
