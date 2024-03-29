@@ -151,12 +151,27 @@
     git = {
       enable = true;
       userName = "Sondre Engen";
-      userEmail = "corastweb94@hotmail.com";
 
       aliases = {
         s = "status";
         commit = "commit -s";
       };
+
+      includes = [
+        {
+          condition = "gitdir:~/dev/personal";
+          content = {
+            userEmail = "corastweb94@hotmail.com";
+          };
+        }
+        {
+          condition = "gitdir:~/dev/work";
+          content = {
+            userEmail = "sondre.engen@ibm.com";
+          };
+        }
+      ];
+
     };
   };
 }

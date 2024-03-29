@@ -8,8 +8,8 @@
     # inputs.nix-colors.homeManagerModules.default
 
     # You can also split up your configuration and import pieces of it here:
-    # ./nvim.nix
-    # ../home/engson/features/ripgrep
+    ../modules/cli/bash
+    ../modules/emacs
   ];
 
   nixpkgs = {
@@ -147,14 +147,12 @@
   #  /etc/profiles/per-user/engson/etc/profile.d/hm-session-vars.sh
   #
   home.sessionPath = [
-    "${config.xdg.configHome}/emacs/bin"
 
   ];
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
     # NOTE! Only reloads on login
     # EDITOR = "emacs";
-    DOOMDIR = "${config.xdg.configHome}/doom";
   };
 
   xdg = {
