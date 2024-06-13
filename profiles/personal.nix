@@ -9,7 +9,10 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
-    # ../home/engson/features/ripgrep
+    ../modules/cli/cowsay
+    ../modules/cli/tmux
+    ../modules/cli/bash
+    ../modules/emacs
   ];
 
   nixpkgs = {
@@ -34,8 +37,6 @@
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
-      # Workaround for https://github.com/nix-community/home-manager/issues/2942
-      allowUnfreePredicate = _: true;
     };
   };
   # Home Manager needs a bit of information about you and the paths it should
@@ -57,7 +58,7 @@
   home.packages = [
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
-    pkgs.cowsay
+    # pkgs.cowsay
     pkgs.neofetch
     #pkgs.hello
     pkgs.just
@@ -72,15 +73,16 @@
     pkgs.pandoc
     pkgs.asciidoctor
 
-    pkgs.nixfmt
     # Work related packages
+
+    # Devenv packages
+    #pkgs.cachix
+    #inputs.devenv.packages."${pkgs.system}".devenv
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
-    (pkgs.nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
-
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
     # # environment:
@@ -102,15 +104,7 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-    # Doom emacs
     # https://bhankas.org/blog/deploying_doom_emacs_config_via_nixos_home_manager/
-    doom = {
-      enable = true;
-      executable = false;
-      recursive = true;
-      source = ../configs/doom;
-      target = "${config.xdg.configHome}/doom";
-    };
   };
 
   # home.activation.doom = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -122,8 +116,6 @@
   #   fi
   #   '';
 
-  fonts.fontconfig.enable = true;
-
   # You can also manage environment variables but you will have to manually
   # source
   #
@@ -133,11 +125,11 @@
   #
   #  /etc/profiles/per-user/engson/etc/profile.d/hm-session-vars.sh
   #
+
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
     # NOTE! Only reloads on login
     # EDITOR = "emacs";
-    DOOMDIR = "${config.xdg.configHome}/doom";
   };
 
   xdg = {
@@ -151,12 +143,6 @@
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
-    tmux = {
-      enable = true;
-      historyLimit = 20000;
-      terminal = "tmux-256color";
-    };
-
     direnv = {
       enable = true;
       enableBashIntegration = true;
@@ -165,33 +151,27 @@
     git = {
       enable = true;
       userName = "Sondre Engen";
-      userEmail = "corastweb94@hotmail.com";
 
       aliases = {
         s = "status";
         commit = "commit -s";
       };
-    };
 
-    bash = {
-      enable = true;
-      initExtra = ''
-        . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+      includes = [
+        {
+          condition = "gitdir:~/dev/personal";
+          content = {
+            userEmail = "corastweb94@hotmail.com";
+          };
+        }
+        {
+          condition = "gitdir:~/dev/work";
+          content = {
+            userEmail = "sondre.engen@ibm.com";
+          };
+        }
+      ];
 
-        if [ -f $HOME/Dev/.workstation/configs/.bashrc ]; then
-          source $HOME/Dev/.workstation/configs/.bashrc
-        fi
-
-        export PATH=$XDG_CONFIG_HOME/emacs/bin:$PATH
-      '';
-      profileExtra =
-        ''export XDG_DATA_DIRS="$HOME/.nix-profile/share:$XDG_DATA_DIRS"'';
-    };
-
-    emacs = {
-      enable = true;
-      package =
-        pkgs.emacs; # replace with pkgs.emacs-gtk, or a version provided by the community overlay if desired.
     };
   };
 }

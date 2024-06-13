@@ -1,4 +1,5 @@
 {
+  # TODO: Create way to not need home-manager to switch on first install
   description = "My Home Manager flake";
 
   inputs = {
@@ -6,7 +7,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     # You can access packages and modules from different nixpkgs revs
     # at the same time. Here's an working example:
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # Flake util functions
     flake-utils.url = "github:numtide/flake-utils";
     # Manages configs and software install by symlinking
@@ -14,6 +15,8 @@
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Devenv for easy setup of development environments
+    devenv.url = "github:cachix/devenv/latest";
   };
 
   outputs = { self, nixpkgs, home-manager, ... } @ inputs:
@@ -38,7 +41,7 @@
       # Standalone home-manager configuration entrypoint
       # Available through 'home-manager --flake .#your-username@your-hostname'
       homeConfigurations = {
-        "${username}@desktop" = home-manager.lib.homeManagerConfiguration {
+        "personal" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         # Specify your home configuration modules here, for example,
         extraSpecialArgs = {inherit inputs outputs;};
@@ -52,10 +55,10 @@
               stateVersion = "23.11";
             };
           }
-          ./home-manager/home.nix 
+          ./profiles/personal.nix
         ];
       };
-      "${username}@work" = home-manager.lib.homeMamangerConfiguration {
+      "work" = home-manager.lib.homeMamangerConfiguration {
         pkgs = nixpkgs.legacyPacakges.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
@@ -66,7 +69,7 @@
               stateVersion = "23.11";
             };
           }
-          ./home-manager/home.nix
+          ./profiles/work.nix
         ];
       };
     };
