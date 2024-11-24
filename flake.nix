@@ -55,8 +55,8 @@
           ./home-manager/home.nix 
         ];
       };
-      "${username}@work" = home-manager.lib.homeMamangerConfiguration {
-        pkgs = nixpkgs.legacyPacakges.x86_64-linux;
+      "${username}@work" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
           {
