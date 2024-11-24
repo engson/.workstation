@@ -4,6 +4,7 @@ My complete setup of workstation on a linux.
 
 == Prerequisites
 - git (Will use home-manager git after install)
+- Repo cloned into /Dev/.workstation folder
 
 == Installation
 
@@ -12,7 +13,7 @@ My complete setup of workstation on a linux.
 # Install nix
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 
-# Add flakes by editing ~/.config/nix/nix.conf with the following line to enable it:
+# Make sure flakes enabled  ~/.config/nix/nix.conf with the following line:
 experimental-features = nix-command flakes
 ----
 
@@ -24,8 +25,9 @@ Install home-manager and switch to specific config
 [source,bash]
 ----
 # Initialize must be done first
-nix run . switch
+nix run . switch (No longer works)
 
+nix run home-manager -- switch --flake .#engson@desktop -b backup
 
 #Reconfigure in non-flake hm
 home-manager switch --flake .
