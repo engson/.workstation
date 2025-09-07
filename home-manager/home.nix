@@ -102,15 +102,6 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-    # Doom emacs
-    # https://bhankas.org/blog/deploying_doom_emacs_config_via_nixos_home_manager/
-    doom = {
-      enable = true;
-      executable = false;
-      recursive = true;
-      source = ../configs/doom;
-      target = "${config.xdg.configHome}/doom";
-    };
   };
 
   # home.activation.doom = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -137,7 +128,6 @@
   home.sessionVariables = {
     # NOTE! Only reloads on login
     # EDITOR = "emacs";
-    DOOMDIR = "${config.xdg.configHome}/doom";
   };
 
   xdg = {
@@ -188,10 +178,5 @@
         ''export XDG_DATA_DIRS="$HOME/.nix-profile/share:$XDG_DATA_DIRS"'';
     };
 
-    emacs = {
-      enable = true;
-      package =
-        pkgs.emacs; # replace with pkgs.emacs-gtk, or a version provided by the community overlay if desired.
-    };
   };
 }
