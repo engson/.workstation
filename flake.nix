@@ -47,13 +47,6 @@
           inherit inputs outputs;
         };
       };
-      # Laptop
-      laptop = nix.nixosSystem {
-        modules = [./hosts/laptop];
-        specialArgs = {
-          inherit inputs outputs;
-        };
-      };
     };
 
     # Standalone home-manager configuration entrypoint
