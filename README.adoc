@@ -110,5 +110,17 @@ error: getting status of '/nix/store/bhrlvs829n0bgg5c2b1q41vysnka9w07-source/202
 # Make sure flake is git committed or not .gitignored
 ----
 
+.nvidia drivers
+[source,bash]
+----
+# This should run with no errors
+nvidia-smi
+
+#You should not see nouveau.
+lsmod | grep nvidia
+----
+
+
 == References
 https://github.com/Misterio77/nix-starter-configs.git
+
