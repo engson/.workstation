@@ -1,13 +1,38 @@
 = .workstation
 
 My complete setup of workstation on a linux.
+It uses Nixos to configure the system
+Home-manager is used to ...
+
+
+== Explanation of setup
+
+*home* folder is home-manger configs for each host
+
+*hosts* folder is nixos configuration.
+
 
 == Prerequisites
 - git (Will use home-manager git after install)
-- Repo cloned into /Dev/.workstation folder
+- Repo cloned into /Dev/.workstation folder TODO: Allow any location.
 
-== Installation
+== How to bootstrap
 
+Depending on what OS is being used, either any Linux OS or NIXOS the bootstrapping is a bit different.
+
+
+=== NixOs
+[source, bash]
+----
+# Run this in repo root.
+nix-shell
+
+# If already has nix setup with flakes and nix-command, this run devShell in flake.nix
+nix develop
+----
+
+=== Other linux distro
+Start by installing nix
 [source,bash]
 ----
 # Install nix
@@ -16,6 +41,12 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
 # Make sure flakes enabled  ~/.config/nix/nix.conf with the following line:
 experimental-features = nix-command flakes
 ----
+
+
+
+
+!TODO: Fix old readme below
+
 
 == Home manager config helps
 
