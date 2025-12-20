@@ -42,7 +42,7 @@
     nixosConfigurations = {
       # Main desktop
       desktop = lib.nixosSystem {
-        modules = [./hosts/desktop];
+        modules = [ ./hosts/desktop ];
         specialArgs = {
           inherit inputs outputs;
         };

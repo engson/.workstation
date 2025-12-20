@@ -1,4 +1,4 @@
-{ pkgs, inputs, outputs, lib, config, pkgs, ... }: {
+{ pkgs, inputs, outputs, lib, config, ... }: {
   # You can import other home-manager modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/home-manager):
@@ -75,6 +75,9 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
+  home.stateVersion = "25.11";
+  home.username = "engson";
+  home.homeDirectory = "/home/engson";
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.

@@ -20,17 +20,6 @@ Home-manager is used to ...
 
 Depending on what OS is being used, either any Linux OS or NIXOS the bootstrapping is a bit different.
 
-
-=== NixOs
-[source, bash]
-----
-# Run this in repo root.
-nix-shell
-
-# If already has nix setup with flakes and nix-command, this run devShell in flake.nix
-nix develop
-----
-
 === Other linux distro
 Start by installing nix
 [source,bash]
@@ -43,43 +32,48 @@ experimental-features = nix-command flakes
 ----
 
 
-
-
-!TODO: Fix old readme below
-
-
-== Home manager config helps
-
-
-== Use
-Install home-manager and switch to specific config
-[source,bash]
+== First time use
+[source, bash]
 ----
-# Initialize must be done first
-nix run . switch (No longer works)
+# Run this in repo root if NOT nix-command or flakes.
+nix-shell
 
-nix run home-manager -- switch --flake .#engson@desktop -b backup
-
-#Reconfigure in non-flake hm
-home-manager switch --flake .
-
-#Reconfigure flake after init
-nix flake update
-home-manager switch --flake .
-
-home-manager switch --flake .#engson@desktop
-
-
-nix flake check
-# Devshell (not same as nix-shell)
+# If already has nix setup with flakes and nix-command, this run devShell in flake.nix
 nix develop
-# temporary access to a package
-nix shell - run a shell in which the specified packages are available
-# debugging derivation builds and development environments
-nux develop - run a shell in which the specified packages are available
 ----
+
+.Nixos
+[source, bash]
+----
+# Build system configuration
+nixos-rebuild build --flake .#desktop
+
+nixos-rebuild switch --flake .#desktop
+----
+
+.Other linux distro
+[source, bash]
+----
+# Build system configuration
+home-manager build --flake .engson@work
+
+home-manager switch --flake .engson@work
+----
+
+== Update configs
+[source, bash]
+----
+# Evaluate flake.nix and check if syntactically is correct
+nix flake check
+
+# Reconfigure flake after init 
+nix flake update
+# Git commit and push changes
+----
+
 
 == Secrets
+TODO: Not in use yet
 [source,bash]
 ----
 mkdir -p ~/.config/sops/age
@@ -108,12 +102,12 @@ nix flake update - update flake lock file
 ----
 
 == Common issues
-.flake issues
+.flake issue 1
 [source,bash]
 ----
-warning: Git tree '/home/engson/Dev/aoc' is dirty
+warning: Git tree '<location>' is dirty
 error: getting status of '/nix/store/bhrlvs829n0bgg5c2b1q41vysnka9w07-source/2023': No such file or director
-# Simply make sure flake is  git committed. Otherwise ignored.
+# Make sure flake is git committed or not .gitignored
 ----
 
 == References
