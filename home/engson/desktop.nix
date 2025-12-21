@@ -116,7 +116,7 @@
           email = "corastweb94@hotmail.com";
           name = "Sondre Engen";
         };
-        aliases = {
+        alias = {
           s = "status";
           commit = "commit -s";
         };
