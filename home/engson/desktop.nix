@@ -14,25 +14,25 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    pkgs.cowsay
-    pkgs.neofetch
-    #pkgs.hello
-    pkgs.just
-    pkgs.fd
-    pkgs.shellcheck
-    pkgs.which
-    pkgs.bat
+  home.packages = with pkgs; [
+    # todo: fix required nix-index to run this.
+    comma # Install and run programs by sticking a , before them
 
-    pkgs.gh
+    bc # calculator
+    nh # wraper for nixos and hm
+    cowsay
+    fastfetch
+    just
+    fd
+    shellcheck
+    which
+    bat
 
-    pkgs.btop
-    pkgs.pandoc
-    pkgs.asciidoctor
+    btop
+    pandoc
+    asciidoctor
 
-    pkgs.nixfmt
+    nixfmt
     # Work related packages
 
     # # You can also create simple shell scripts directly inside your
