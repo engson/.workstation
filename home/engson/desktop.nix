@@ -111,12 +111,15 @@
 
     git = {
       enable = true;
-      userName = "Sondre Engen";
-      userEmail = "corastweb94@hotmail.com";
-
-      aliases = {
-        s = "status";
-        commit = "commit -s";
+      settings = {
+        user = {
+          email = "corastweb94@hotmail.com";
+          name = "Sondre Engen";
+        };
+        aliases = {
+          s = "status";
+          commit = "commit -s";
+        };
       };
     };
 
