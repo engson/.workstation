@@ -1,8 +1,9 @@
 { config, pkgs, ... }:
-{
+{ # TODO: Fix issue with nixos module and function when importing
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ../common/global
     ];
 
   # Bootloader.
