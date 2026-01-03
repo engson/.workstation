@@ -1,13 +1,27 @@
 = .workstation
 
 My complete setup of workstation on a linux.
+It uses Nixos to configure the system
+Home-manager is used to ...
+
+
+== Explanation of setup
+
+*home* folder is home-manger configs for each host
+
+*hosts* folder is nixos configuration.
+
 
 == Prerequisites
 - git (Will use home-manager git after install)
-- Repo cloned into /Dev/.workstation folder
+- Repo cloned into /Dev/.workstation folder TODO: Allow any location.
 
-== Installation
+== How to bootstrap
 
+Depending on what OS is being used, either any Linux OS or NIXOS the bootstrapping is a bit different.
+
+=== Other linux distro
+Start by installing nix
 [source,bash]
 ----
 # Install nix
@@ -17,38 +31,49 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
 experimental-features = nix-command flakes
 ----
 
-== Home manager config helps
 
-
-== Use
-Install home-manager and switch to specific config
-[source,bash]
+== First time use
+[source, bash]
 ----
-# Initialize must be done first
-nix run . switch (No longer works)
+# Run this in repo root if NOT nix-command or flakes.
+nix-shell
 
-nix run home-manager -- switch --flake .#engson@desktop -b backup
-
-#Reconfigure in non-flake hm
-home-manager switch --flake .
-
-#Reconfigure flake after init
-nix flake update
-home-manager switch --flake .
-
-home-manager switch --flake .#engson@desktop
-
-
-nix flake check
-# Devshell (not same as nix-shell)
+# If already has nix setup with flakes and nix-command, this run devShell in flake.nix
 nix develop
-# temporary access to a package
-nix shell - run a shell in which the specified packages are available
-# debugging derivation builds and development environments
-nux develop - run a shell in which the specified packages are available
 ----
+
+.Nixos
+[source, bash]
+----
+# Build system configuration
+nixos-rebuild build --flake .#desktop
+
+nixos-rebuild switch --flake .#desktop
+----
+
+.Other linux distro
+[source, bash]
+----
+# Build system configuration
+home-manager build --flake .engson@work
+
+home-manager switch --flake .engson@work
+----
+
+== Update configs
+[source, bash]
+----
+# Evaluate flake.nix and check if syntactically is correct
+nix flake check
+
+# Reconfigure flake after init 
+nix flake update
+# Git commit and push changes
+----
+
 
 == Secrets
+TODO: Not in use yet
 [source,bash]
 ----
 mkdir -p ~/.config/sops/age
@@ -77,13 +102,25 @@ nix flake update - update flake lock file
 ----
 
 == Common issues
-.flake issues
+.flake issue 1
 [source,bash]
 ----
-warning: Git tree '/home/engson/Dev/aoc' is dirty
+warning: Git tree '<location>' is dirty
 error: getting status of '/nix/store/bhrlvs829n0bgg5c2b1q41vysnka9w07-source/2023': No such file or director
-# Simply make sure flake is  git committed. Otherwise ignored.
+# Make sure flake is git committed or not .gitignored
 ----
+
+.nvidia drivers
+[source,bash]
+----
+# This should run with no errors
+nvidia-smi
+
+#You should not see nouveau.
+lsmod | grep nvidia
+----
+
 
 == References
 https://github.com/Misterio77/nix-starter-configs.git
+

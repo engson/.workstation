@@ -1,73 +1,64 @@
 {
-  description = "My Home Manager flake";
+  description = "My NixOS + Home-manager configuration";
 
   inputs = {
     # Software source
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
-    # You can access packages and modules from different nixpkgs revs
-    # at the same time. Here's an working example:
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    # Flake util functions
-    flake-utils.url = "github:numtide/flake-utils";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    # All linux systems
+    systems.url = "github:nix-systems/default-linux";
     # Manages configs and software install by symlinking
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.11";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... } @ inputs:
-    let
-      inherit (self) outputs;
-      systems = [
-        "x86_86-linux"
-      ];
-      username = "engson";
-      forAllSystems = nixpkgs.lib.genAttrs systems;
-    in {
-      # Your custom packages
-      # Accessible through 'nix build', 'nix shell', etc
-      packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
-
-      # Formatter for your nix files, available through 'nix fmt'
-      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
-
+  outputs = { self, nixpkgs, home-manager, systems, ... } @ inputs: let
+    inherit (self) outputs;
+    # Merge into one lib, prioritizing home manager
+    lib = nixpkgs.lib // home-manager.lib;
+    forEachSystem = fun: lib.genAttrs (import systems) (system: fun pkgsFor.${system});
+    pkgsFor = lib.genAttrs (import systems) (
+      system:
+        import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        }
+    );
+    username = "engson";
+  in {
+    inherit lib;
       # Your custom packages and modifications, exported as overlays
-      overlays = import ./overlays {inherit inputs;};
+    overlays = import ./overlays {inherit inputs;};
 
-      # Standalone home-manager configuration entrypoint
-      # Available through 'home-manager --flake .#your-username@your-hostname'
-      homeConfigurations = {
-        "${username}@desktop" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        # Specify your home configuration modules here, for example,
-        extraSpecialArgs = {inherit inputs outputs;};
+    # Your custom packages
+    # Accessible through 'nix build', 'nix shell', etc
+    packages = forEachSystem (pkgs: import ./pkgs {inherit pkgs;});
+    # Accessible through 'nix develop'
+    devShells = forEachSystem (pkgs: import ./shell.nix {inherit pkgs;});
+    # Formatter for your nix files, available through 'nix fmt'
+    formatter = forEachSystem (pkgs: pkgs.alejandra);
 
-        # the path to your home.nix.
-        modules = [
-          {
-            home = {
-              username = "${username}";
-              homeDirectory = "/home/${username}";
-              stateVersion = "23.11";
-            };
-          }
-          ./home-manager/home.nix 
-        ];
+    nixosConfigurations = {
+      # Main desktop
+      desktop = lib.nixosSystem {
+        modules = [ ./hosts/desktop ];
+        specialArgs = {
+          inherit inputs outputs;
+        };
       };
-      "${username}@work" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [
-          {
-            home = {
-              username = "${username}";
-              homeDirectory = "/home/${username}";
-              stateVersion = "23.11";
-            };
-          }
-          ./home-manager/home.nix
-        ];
+    };
+
+    # Standalone home-manager configuration entrypoint
+    # Available through 'home-manager --flake .#your-username@your-hostname'
+    homeConfigurations = {
+      # Work laptop with fedora
+      "${username}@work" = lib.homeManagerConfiguration {
+        modules = [ ./home/${username}/work.nix ./home/${username}/nixpkgs.nix ];
+        pkgs = pkgsFor.x86_64-linux;
+        extraSpecialArgs = {
+          inherit inputs outputs;
+        };
       };
     };
   };
