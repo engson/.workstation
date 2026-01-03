@@ -31,6 +31,14 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
 experimental-features = nix-command flakes
 ----
 
+[IMPORTANT]
+====
+nixos-rebuild `--flake .` defaults to look for nixConfiguration named `hostname`.  +
+home-manager `--flake .` defaults to look for homeConfigurations named `$(USERNAME)@hostname`.
+
+Specify name explicitly when needed e.g. `--flake .#desktop` to use other than default, usefull if this is first setup and hostname is reconfigured later.
+====
+
 
 == First time use
 [source, bash]
@@ -46,9 +54,11 @@ nix develop
 [source, bash]
 ----
 # Build system configuration
-nixos-rebuild build --flake .#desktop
+nixos-rebuild build --flake .
 
-nixos-rebuild switch --flake .#desktop
+# Build and activate
+
+nixos-rebuild switch --flake .
 ----
 
 .Other linux distro
