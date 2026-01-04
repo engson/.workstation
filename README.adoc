@@ -1,16 +1,29 @@
-= .workstation
+= workstation
+ifdef::env-github[]
+:imagesdir:
+ https://gist.githubusercontent.com/path/to/gist/revision/dir/with/all/images
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+ifndef::env-github[]
+:imagesdir: ./
+endif::[]
+:toc:
+:toc-placement!:
 
-My complete setup of workstation on a linux.
-It uses Nixos to configure the system
-Home-manager is used to ...
+My complete setup of workstation on a linux system. +
+It consist of nixos + home-manager OR home-manager only on non-nixos distros.
 
+toc::[]
 
 == Explanation of setup
 
 *home* folder is home-manger configs for each host
 
 *hosts* folder is nixos configuration.
-
 
 == Prerequisites
 - git (Will use home-manager git after install)
