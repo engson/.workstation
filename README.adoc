@@ -143,6 +143,8 @@ nvidia-smi
 lsmod | grep nvidia
 ----
 
+nixos-rebuild dry-build --flake .
+
 
 == References
 https://github.com/Misterio77/nix-starter-configs.git
