@@ -8,20 +8,20 @@
       imports = 
         with config.flake.modules.nixos;
         [
-          # modules
-
+          # Modules
+          facter
+          shell
           # users
-
-
+          engson
         ]
-        # Specifig Home-Manager modules
+        # Specific Home-Manager modules
         ++ [
           {
             home-manager.users.engson = {
               imports = with config.flake.modules.homeManager; [
                 base
               ];
-
+              # other nix packages
               home.packages = with pkgs; [
                 thunderbird
               ];
