@@ -22,7 +22,7 @@ topLevel@{
           "networkmanager"
           "wheel"
         ];
-      }
+      };
     };
 
     modules.homeManager.engson = {
