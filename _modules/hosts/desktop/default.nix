@@ -1,5 +1,5 @@
-{ self, inouts
-...,
+{ config ,
+...
 }:
 {
   flake.modules.nixos."hosts/desktop" = 

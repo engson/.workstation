@@ -25,6 +25,8 @@ toc::[]
 
 *hosts* folder is nixos configuration.
 
+*import-tree* is a library used to import every _.nix_ file (modules) recursivly in _./modules_ folder.
+
 == Prerequisites
 - git (Will use home-manager git after install)
 - Repo cloned into /Dev/.workstation folder TODO: Allow any location.
