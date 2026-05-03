@@ -13,21 +13,6 @@
           shell
           # users
           engson
-        ]
-        # Specific Home-Manager modules
-        ++ [
-          {
-            home-manager.users.engson = {
-              imports = with config.flake.modules.homeManager; [
-                base
-              ];
-              # other nix packages
-              home.packages = with pkgs; [
-                thunderbird
-              ];
-
-            };
-          }
         ];
 
         boot = {

@@ -1,6 +1,6 @@
 {
 
-  description = "My systems configuration, using NixOS + Home-manager";
+  description = "My systems configuration, using NixOS + hjem";
 
   # Declares flake inputs
   inputs = {

@@ -55,6 +55,10 @@
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = false;
   services.desktopManager.plasma6.enable = true;
+  # Remove kate
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    kate
+  ];
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -92,6 +96,13 @@
     packages = with pkgs; [
     #  thunderbird
     ];
+  };
+  # Virtual-machine
+  users.groups.vm = {};
+  users.users.vm = {
+    isNormalUser = true;
+    initialPassword = "test";
+    group = "vm";
   };
 
   # Install firefox.
