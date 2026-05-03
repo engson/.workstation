@@ -17,8 +17,21 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelParams = [ "amd_iommu=off" ];
+  boot.blacklistedKernelModules = [ "nouveau" ];
 
-  networking.hostName = "nixos"; # Define your hostname.
+  # Nvidia driver
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia = {
+    modesetting.enable = true;
+    open = false;
+    powerManagement.enable = false;
+    nvidiaSettings = true;
+  };
+  hardware.graphics.enable = true;
+
+  hardware.enableAllFirmware = true;
+
+  networking.hostName = "desktop"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -61,7 +74,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    jack.enable = true;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
@@ -77,7 +90,6 @@
     description = "sondre engen";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      kdePackages.kate
     #  thunderbird
     ];
   };
@@ -85,8 +97,32 @@
   # Install firefox.
   programs.firefox.enable = true;
 
-  programs.git = {
-    enable = true;
+  programs = {
+    bash = {
+      enable = true;
+    };
+
+    git = {
+      enable = true;
+      config = {
+        user = {
+          email = "corastweb94@hotmail.com";
+          name = "Sondre Engen";
+        };
+        alias = {
+          s = "status";
+          commit = "commit -s";
+        };
+      };
+    };
+
+    tmux = {
+      enable = true;
+      historyLimit = 20000;
+      terminal = "tmux-256color";
+    };
+
+
   };
 
   # Allow unfree packages
@@ -101,6 +137,8 @@
     keymapp
     git
     vscode
+    helix
+    nvd
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
