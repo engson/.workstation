@@ -19,15 +19,55 @@ It consist of nixos + home-manager OR home-manager only on non-nixos distros.
 
 toc::[]
 
-== Explanation of setup
+== Explanation of differen setups
+Multisetup is only for my own learning to see the difference. Basis setup will only work for nixos hosts (for now).
 
-*home* folder is home-manger configs for each host
+*basic* basic setup with only flake wrapping around hardware + configuration. Nothing extra.
 
-*hosts* folder is nixos configuration.
+*dendritic* _basic_ setup with dendritic pattern used.
 
 == Prerequisites
 - git (Will use home-manager git after install)
 - Repo cloned into /Dev/.workstation folder TODO: Allow any location.
+
+== Commands
+
+.Nixos
+[source, bash]
+----
+# Build system configuration
+nixos-rebuild build --flake .
+
+# Build and activate, with set new default
+nixos-rebuild switch --flake .
+
+# Activate temporary, non-permanent
+nixos-rebuild test --flake .
+
+# Create virtual-machine to test config
+nixos-rebuild build-vm --flake .
+
+# Dry build with a check of what will change
+nixos-rebuild dry-activate --flake .
+
+## Diffing
+nix shell nixpkgs#nvd
+sudo nixos-rebuild build --flake .
+
+nvd diff /run/current-system ./result
+
+nix store diff-closures /run/current-system ./result
+
+
+# Garbage collecting
+nix store gc # Removes dead paths, but keep all profiles
+
+nix-collect-garbage # Removed dead paths and old profiles if -d specified.
+----
+
+
+
+== OLD CONFIG BELOW
 
 == How to bootstrap
 
@@ -63,16 +103,6 @@ nix-shell
 nix develop
 ----
 
-.Nixos
-[source, bash]
-----
-# Build system configuration
-nixos-rebuild build --flake .
-
-# Build and activate
-
-nixos-rebuild switch --flake .
-----
 
 .Other linux distro
 [source, bash]
@@ -91,7 +121,7 @@ nix flake check
 
 # Reconfigure flake after init 
 nix flake update
-# Git commit and push changes
+# Git commit and push 
 ----
 
 
@@ -143,7 +173,20 @@ nvidia-smi
 lsmod | grep nvidia
 ----
 
+nixos-rebuild dry-build --flake .
+
 
 == References
 https://github.com/Misterio77/nix-starter-configs.git
 
+
+
+=== TODOS
+
+1. Simple nixos only setup
+2. Wrappers for modules to quickly share on non-nixos machines
+nix run github:vimjoyer/nixconf#environment
+ 
+3. Config files outside of nixos-rebuild, only linkin
+
+== Notes
