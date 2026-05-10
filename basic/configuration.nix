@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-unstable, ... }:
 
 {
   imports =
@@ -141,22 +141,27 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
     # zsa
-    keymapp
-    git
-    vscode
-    helix
-    nvd
+    pkgs.keymapp
+    pkgs.git
+    pkgs.vscode
+    pkgs.helix
+    pkgs.nvd
+    # Language servers
+    pkgs.nil
+    pkgs.nixd
+
+    pkgs-unstable.zed-editor
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # ZSA Keyboards
   hardware.keyboard.zsa.enable = true;
-  
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -164,7 +169,7 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-  
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
