@@ -179,6 +179,11 @@
   #   enableSSHSupport = true;
   # };
 
+  # Dotfiles
+  systemd.tmpfiles.rules = [
+    "L+ /home/engson/.config/zed - - - - /home/engson/Dev/.workstation/.config/zed"
+  ];
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
