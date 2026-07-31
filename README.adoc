@@ -74,7 +74,7 @@ To udate only a selection `nix flake update nixpkgs-unstable`
 [source, bash]
 ---
 # Run tmux
-nix run wrappedPrograms/tmux
+nix run github:engson1/.workstation/wrappedPrograms#tmux
 ---
 
 

@@ -120,6 +120,9 @@
   programs = {
     bash = {
       enable = true;
+      interactiveShellInit = ''
+        eval "$(oh-my-posh init bash --config 'https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/probua.minimal.omp.json')"
+      '';
     };
 
     git = {
@@ -167,6 +170,8 @@
     pkgs.nixd
 
     pkgs-unstable.zed-editor
+
+    pkgs-unstable.oh-my-posh
   ];
 
   nix.settings.experimental-features = [
