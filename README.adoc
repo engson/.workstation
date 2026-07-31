@@ -68,7 +68,14 @@ nix-collect-garbage # Removed dead paths and old profiles if -d specified.
 == Update packages
 To update packages, we need to update flake inputs.
 Simply run `nix flake update` to update all inputs.
-To udate only a selection `nix flake update nixpkgs-unstabe`
+To udate only a selection `nix flake update nixpkgs-unstable`
+
+== Run modules directly
+[source, bash]
+---
+# Run tmux
+nix run wrappedPrograms/tmux
+---
 
 
 == OLD CONFIG BELOW

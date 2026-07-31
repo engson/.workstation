@@ -142,6 +142,11 @@
       terminal = "tmux-256color";
     };
 
+    # Fix zed extension issues
+    nix-ld = {
+      enable = true;
+    };
+
   };
 
   # Allow unfree packages
