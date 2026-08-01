@@ -121,7 +121,10 @@
     bash = {
       enable = true;
       interactiveShellInit = ''
+        # Add bash styling
         eval "$(oh-my-posh init bash --config 'https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/probua.minimal.omp.json')"
+        # Add devenv hook
+        eval "$(devenv hook bash)"
       '';
     };
 
@@ -172,6 +175,7 @@
     pkgs-unstable.zed-editor
 
     pkgs-unstable.oh-my-posh
+    pkgs-unstable.devenv
   ];
 
   nix.settings.experimental-features = [
