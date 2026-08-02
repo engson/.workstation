@@ -153,6 +153,9 @@
       enable = true;
     };
 
+    niri = {
+      enable = true;
+    };
   };
 
   # Allow unfree packages
@@ -176,6 +179,16 @@
 
     pkgs-unstable.oh-my-posh
     pkgs-unstable.devenv
+
+    # Niri components
+    pkgs.waybar
+    pkgs.alacritty
+    pkgs.fuzzel
+    pkgs.swaylock
+    pkgs.playerctl
+    pkgs.brightnessctl
+    pkgs.wireplumber
+    pkgs.swaybg
   ];
 
   nix.settings.experimental-features = [
@@ -197,6 +210,7 @@
   # Dotfiles
   systemd.tmpfiles.rules = [
     "L+ /home/engson/.config/zed - - - - /home/engson/Dev/.workstation/.config/zed"
+    "L+ /home/engson/.config/niri - - - - /home/engson/Dev/.workstation/.config/niri"
   ];
 
   # List services that you want to enable:
