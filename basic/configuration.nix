@@ -71,7 +71,6 @@
     layout = "us";
     variant = "altgr-intl";
   };
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -181,7 +180,7 @@
     pkgs-unstable.devenv
 
     # Niri components
-    pkgs.waybar
+    pkgs-unstable.waybar
     pkgs.alacritty
     pkgs.fuzzel
     pkgs.swaylock
@@ -190,6 +189,23 @@
     pkgs.wireplumber
     pkgs.swaybg
   ];
+  # Install fonts
+  fonts.packages = with pkgs; [
+    font-awesome
+    font-awesome_6
+    inter
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-color-emoji
+    liberation_ttf
+    fira-code
+    fira-code-symbols
+    mplus-outline-fonts.githubRelease
+    dina-font
+    proggyfonts
+    nerd-fonts.hack
+  ];
+  fonts.fontconfig.enable = true;
 
   nix.settings.experimental-features = [
     "nix-command"
@@ -211,6 +227,7 @@
   systemd.tmpfiles.rules = [
     "L+ /home/engson/.config/zed - - - - /home/engson/Dev/.workstation/.config/zed"
     "L+ /home/engson/.config/niri - - - - /home/engson/Dev/.workstation/.config/niri"
+    "L+ /home/engson/.config/waybar - - - - /home/engson/Dev/.workstation/.config/waybar"
   ];
 
   # List services that you want to enable:

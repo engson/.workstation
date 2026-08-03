@@ -77,7 +77,10 @@ To udate only a selection `nix flake update nixpkgs-unstable`
 nix run github:engson1/.workstation/wrappedPrograms#tmux
 ---
 
+== WTM (Window Tile Manager)
+I am using Niri
 
+toolbar: waybar with config from https://git.gay/sunworms/nixos-files/src/commit/23a9fa5e440a13f6d7c2aefdd3c2cf8ecbb019a9/users/sunny/desktop/waybar
 == OLD CONFIG BELOW
 
 == How to bootstrap
