@@ -7,8 +7,7 @@
   "spacing" : 0,
   "modules-left": [
     "custom/nixos-logo",
-    "niri/workspaces",
-    "cpu"
+    "niri/workspaces"
   ],
 
   "modules-center": ["clock"],
@@ -24,7 +23,7 @@
   },
 
   "niri/workspaces": {
-    "format": "{value}",
+    "format": "{value} {icon}",
     "format-window-separator": "|",
     "window-rewrite-default": "",
     "window-rewrite": {
