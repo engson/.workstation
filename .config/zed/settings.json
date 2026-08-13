@@ -7,6 +7,38 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "languages": {
+    "Java": {
+      "show_edit_predictions": false,
+      "completions": {
+        "lsp": false
+      },
+      "colorize_brackets": true,
+      "word_diff_enabled": false,
+      "tasks": {
+        "prefer_lsp": false,
+        "enabled": false
+      },
+      "inlay_hints": {
+        "show_value_hints": false,
+        "show_type_hints": false,
+        "show_parameter_hints": false,
+        "show_other_hints": false
+      },
+      "show_completions_on_input": false,
+      "show_completion_documentation": false,
+      "use_auto_surround": false,
+      "jsx_tag_auto_close": {
+        "enabled": false
+      },
+      "use_on_type_format": false,
+      "indent_guides": {
+        "enabled": false
+      },
+      "auto_indent_on_paste": false,
+      "enable_language_server": false
+    }
+  },
   "project_panel": {
     "dock": "left"
   },

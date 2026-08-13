@@ -228,6 +228,7 @@
     "L+ /home/engson/.config/zed - - - - /home/engson/Dev/.workstation/.config/zed"
     "L+ /home/engson/.config/niri - - - - /home/engson/Dev/.workstation/.config/niri"
     "L+ /home/engson/.config/waybar - - - - /home/engson/Dev/.workstation/.config/waybar"
+    "L+ /home/engson/.config/helix - - - - /home/engson/Dev/.workstation/.config/helix"
   ];
 
   # List services that you want to enable:

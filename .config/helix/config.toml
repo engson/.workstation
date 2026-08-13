@@ -1,1 +1,4 @@
-theme = "new_moon"
+theme = "flexoki_dark"
+
+[editor.cursor-shape]
+insert = "bar"

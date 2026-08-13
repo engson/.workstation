@@ -14,6 +14,7 @@
     "cpu",
     "memory",
     "network",
+    "network#speed",
     "pulseaudio"
   ],
   "custom/nixos-logo": {
@@ -47,12 +48,16 @@
     "format-wifi": "󰤢",
     "format-ethernet": "󰈀 ",
     "format-disconnected": "󰤠 ",
-    "interval": 5,
+    "interval": 1,
     "tooltip-format": "{ifname} ",
     "on-click": "nm-connection-editor"
 
  },
-
+ "network#speed": {
+    "format": "{bandwidthDownBytes:>9} {bandwidthUpBytes:>9}",
+    "interval": 2,
+    "tooltip-format": "{ipaddr}"
+  },
   "cpu": {
     "interval": 1,
     "format": "  {icon0}{icon1}{icon2}{icon3} {usage:>2}%",
