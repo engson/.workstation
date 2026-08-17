@@ -1,4 +1,7 @@
-theme = "flexoki_dark"
+theme = "varua"
 
 [editor.cursor-shape]
 insert = "bar"
+
+[editor.indent-guides]
+render = true

@@ -3,7 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 {
-  config,
   pkgs,
   pkgs-unstable,
   ...
@@ -101,9 +100,9 @@
       "networkmanager"
       "wheel"
     ];
-    packages = with pkgs; [
-      #  thunderbird
-    ];
+    # packages = with pkgs; [
+    #   #  thunderbird
+    # ];
   };
   # Virtual-machine
   users.groups.vm = { };
@@ -188,6 +187,8 @@
     pkgs.brightnessctl
     pkgs.wireplumber
     pkgs.swaybg
+    # Interactive tree viewer
+    pkgs.broot
   ];
   # Install fonts
   fonts.packages = with pkgs; [
