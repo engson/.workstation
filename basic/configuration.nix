@@ -173,8 +173,6 @@
     pkgs.nil
     pkgs.nixd
 
-    pkgs-unstable.zed-editor
-
     pkgs-unstable.oh-my-posh
     pkgs-unstable.devenv
 
@@ -230,6 +228,7 @@
     "L+ /home/engson/.config/niri - - - - /home/engson/Dev/.workstation/.config/niri"
     "L+ /home/engson/.config/waybar - - - - /home/engson/Dev/.workstation/.config/waybar"
     "L+ /home/engson/.config/helix - - - - /home/engson/Dev/.workstation/.config/helix"
+    "L+ /home/engson/.config/tmux - - - - /home/engson/Dev/.workstation/.config/tmux"
   ];
 
   # List services that you want to enable:
