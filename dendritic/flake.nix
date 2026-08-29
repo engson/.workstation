@@ -1,10 +1,11 @@
 {
 
-  description = "My systems configuration, using NixOS + hjem";
+  description = "My systems configuration, using NixOS in the dendricit pattern";
 
   # Declares flake inputs
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # Allow creating modular, composable and reusable flakes
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -12,13 +13,6 @@
     };
     # Allow recursivly importing .nix file (modules)
     import-tree.url = "github:vic/import-tree";
-    # Allow wrapping packages into self-contained derivatives.
-    wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
-
-    hjem = {
-      url = "github:feel-co/hjem";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
