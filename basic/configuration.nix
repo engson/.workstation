@@ -52,6 +52,10 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
+  # Enable the KDE plasma desktop environment
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
