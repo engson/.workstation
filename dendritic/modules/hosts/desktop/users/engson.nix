@@ -1,10 +1,15 @@
+let
+ username = "engson";
+in
 {
-  inputs, ...
-}:
-  {
-    flake.modules.nixos.desktop = {
-      imports = with inputs.self.modules.nixos; [
-        engson
+  flake.modules.nixos."${username}" = {
+    users.users."${username}" = {
+      isNormalUser = true;
+      extraGroups = [
+        "users"
+        "wheel"
+        "networkmanager"
       ];
     };
-  }
+  };
+}

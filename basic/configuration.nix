@@ -52,24 +52,6 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # Enable the X11 windowing system.
-  # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = true;
-
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = false;
-  services.desktopManager.plasma6.enable = true;
-  # Remove kate
-  environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    kate
-  ];
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "altgr-intl";
-  };
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -104,14 +86,6 @@
     #   #  thunderbird
     # ];
   };
-  # Virtual-machine
-  users.groups.vm = { };
-  users.users.vm = {
-    isNormalUser = true;
-    initialPassword = "test";
-    group = "vm";
-  };
-
   # Install firefox.
   programs.firefox.enable = true;
 
@@ -144,11 +118,6 @@
       enable = true;
       historyLimit = 20000;
       terminal = "tmux-256color";
-    };
-
-    # Fix zed extension issues
-    nix-ld = {
-      enable = true;
     };
 
     niri = {
@@ -224,7 +193,6 @@
 
   # Dotfiles
   systemd.tmpfiles.rules = [
-    "L+ /home/engson/.config/zed - - - - /home/engson/Dev/.workstation/.config/zed"
     "L+ /home/engson/.config/niri - - - - /home/engson/Dev/.workstation/.config/niri"
     "L+ /home/engson/.config/waybar - - - - /home/engson/Dev/.workstation/.config/waybar"
     "L+ /home/engson/.config/helix - - - - /home/engson/Dev/.workstation/.config/helix"
