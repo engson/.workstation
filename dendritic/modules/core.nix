@@ -1,5 +1,5 @@
 {
-  flake.nixosModules.core = { pkgs, ...}: {
+  flake.modules.nixos.core = {
     nixpkgs.config.allowUnfree = true;
     nix.settings.experimental-features = [
       "nix-command"

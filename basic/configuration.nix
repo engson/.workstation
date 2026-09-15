@@ -101,6 +101,9 @@
         eval "$(oh-my-posh init bash --config 'https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/probua.minimal.omp.json')"
         # Add devenv hook
         eval "$(devenv hook bash)"
+        # Add forge home
+        #
+        export STEEL_HOME=$HOME/.local/share/steel
       '';
     };
 
@@ -140,7 +143,7 @@
     # zsa
     pkgs.keymapp
     pkgs.git
-    pkgs.helix
+    # pkgs.helix
     pkgs.nvd
     # Language servers
     pkgs.nil
@@ -163,6 +166,7 @@
 
     # steelix
     pkgs-unstable.steelix
+    pkgs-unstable.steel
   ];
   # Install fonts
   fonts.packages = with pkgs; [
