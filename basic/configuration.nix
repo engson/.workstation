@@ -160,6 +160,9 @@
     pkgs.swaybg
     # Interactive tree viewer
     pkgs.broot
+
+    # steelix
+    pkgs-unstable.steelix
   ];
   # Install fonts
   fonts.packages = with pkgs; [
