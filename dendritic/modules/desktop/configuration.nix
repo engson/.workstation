@@ -17,13 +17,18 @@
     # Enable networking
     networking.networkmanager.enable = true;
     networking.hostName = "desktop";
-    imports = [
+
+
+    # Bootloader.
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
+    imports = with self.modules.nixos; [
       # Common configs
-      self.modules.core
+      core
       # User
-      self.modules.engson
+      engson
       # Tools
-      self.modules.helix
+      helix
     ];
   };
 

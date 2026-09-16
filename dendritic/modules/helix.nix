@@ -1,10 +1,10 @@
 {
   flake.modules.nixos.helix = {
-    pkgs-unstable, ...}:
+    pkgs, ...}:
     {
     environment.systemPackages = [
-      pkgs-unstable.steelix
-      pkgs-unstable.forge
+      pkgs.steelix
+      pkgs.steel
     ];
 
     systemd.tmpfiles.rules = [
