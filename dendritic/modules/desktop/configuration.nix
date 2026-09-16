@@ -6,21 +6,25 @@
   
 }:
 {
-  flake.modules.nixos.desktop = {
-    networking.networkmanager.enable = true;
-    networking.hostName = "desktop";
-    nixpkgs.hostPlatform = "x86_64-linux";
-    import = with inputs.self.modules.nixos; [
-      # what to import here?
-      #
-      core
-      
-      engson
-
-      helix
+  flake.nixosConfigurations.desktop = inputs.nixpkgs.lib.nixosSystem {
+    system = "x86_64-linux";
+    modules = [
+      self.modules.nixos.desktop
     ];
   };
 
-  flake.nixosConfigurations.desktop = inputs.nixpkgs.lib.nixosSystem {
+  flake.modules.nixos.desktop = {
+    # Enable networking
+    networking.networkmanager.enable = true;
+    networking.hostName = "desktop";
+    imports = [
+      # Common configs
+      self.modules.core
+      # User
+      self.modules.engson
+      # Tools
+      self.modules.helix
+    ];
   };
+
 }

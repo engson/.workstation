@@ -1,3 +1,2 @@
 # Basic dendritic
-
-sudo nixos-rebuild build --flake .
+ sudo nixos-rebuild build --flake .

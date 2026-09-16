@@ -11,6 +11,7 @@
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
+    flake-files.url = "github:vic/flake-file";
     # Allow recursivly importing .nix file (modules)
     import-tree.url = "github:vic/import-tree";
   };

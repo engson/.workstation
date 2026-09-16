@@ -1,6 +1,6 @@
 {
   flake.modules.nixos.desktop = {
-    services.xserver.videoDriver = [ "nvidia" ];
+    services.xserver.videoDrivers = [ "nvidia" ];
     hardware.nvidia = { 
       branch = "legacy_580";
       modesetting.enable = true;
