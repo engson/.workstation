@@ -1,7 +1,6 @@
 {
   inputs,
   self,
-  pkgs,
   ...
 }:
 {
@@ -12,35 +11,37 @@
     ];
   };
 
-  flake.nixosModules.desktop = {
-    # Enable networking
-    networking.networkmanager.enable = true;
-    networking.hostName = "desktop";
-    # Other hardware settings
-    hardware.enableAllFirmware = true;
+  flake.nixosModules.desktop =
+    { pkgs, ... }:
+    {
+      # Enable networking
+      networking.networkmanager.enable = true;
+      networking.hostName = "desktop";
+      # Other hardware settings
+      hardware.enableAllFirmware = true;
 
-    # Bootloader.
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = true;
-    # Use latest kernel
-    
-    # Use latest kernel.
-    boot.kernelPackages = pkgs.linuxPackages_latest;
-    boot.kernelParams = [ "amd_iommu=off" ];
-    boot.blacklistedKernelModules = [ "nouveau" ];
+      # Bootloader.
+      boot.loader.systemd-boot.enable = true;
+      boot.loader.efi.canTouchEfiVariables = true;
 
-    # ZSA Keyboard
-    hardware.keyboard.zsa.enable = true;
+      # Use latest kernel.
+      boot.kernelPackages = pkgs.linuxPackages_latest;
+      boot.kernelParams = [ "amd_iommu=off" ];
+      boot.blacklistedKernelModules = [ "nouveau" ];
 
-    imports = with self.nixosModules; [
-      # Common configs
-      core
-      fonts
-      # User
-      engson
-      # Tools
-      helix
-    ];
-  };
+      # ZSA Keyboard
+      hardware.keyboard.zsa.enable = true;
+
+      imports = with self.nixosModules; [
+        # Common configs
+        core
+        fonts
+        # User
+        engson
+        # Tools
+        helix
+
+      ];
+    };
 
 }

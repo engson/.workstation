@@ -4,11 +4,11 @@
     fonts.packages = with pkgs; [
       font-awesome
       font-awesome_6
-      iter
+      inter
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-color-emoji
-      liberation_tff
+      liberation_ttf
       fira-code
       fira-code-symbols
       mplus-outline-fonts.githubRelease
