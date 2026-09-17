@@ -2,7 +2,7 @@ let
  username = "engson";
 in
 {
-  flake.modules.nixos."${username}" = {
+  flake.nixosModules."${username}" = {
     users.users."${username}" = {
       isNormalUser = true;
       extraGroups = [
