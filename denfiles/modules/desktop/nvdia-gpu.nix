@@ -1,5 +1,5 @@
 {
-  flake.nixosModules.desktop = {
+  flake.modules.nixos.desktop = {
     services.xserver.videoDrivers = [ "nvidia" ];
     hardware.nvidia = { 
       branch = "legacy_580";

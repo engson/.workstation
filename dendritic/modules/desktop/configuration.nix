@@ -9,11 +9,11 @@
   flake.nixosConfigurations.desktop = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
-      self.modules.nixos.desktop
+      self.nixosModules.desktop
     ];
   };
 
-  flake.modules.nixos.desktop = {
+  flake.nixosModules.desktop = {
     # Enable networking
     networking.networkmanager.enable = true;
     networking.hostName = "desktop";
@@ -22,7 +22,7 @@
     # Bootloader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
-    imports = with self.modules.nixos; [
+    imports = with self.nixosModules; [
       # Common configs
       core
       # User

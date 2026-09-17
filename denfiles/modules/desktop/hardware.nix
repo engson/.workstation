@@ -2,7 +2,7 @@
 # and may be overwritten by future invocations.  Please make changes
 # to /etc/nixos/configuration.nix instead.
 {
-  flake.nixosModules.desktop = {
+  flake.modules.nixos.desktop = {
     config, lib, modulesPath, ... }:
     {
     imports =
