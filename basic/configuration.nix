@@ -14,6 +14,11 @@
     ./hardware-configuration.nix
   ];
 
+  # Security
+  security.sudo.extraConfig = ''
+    Defaults timestamp_timeout=30
+  '';
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -37,11 +42,6 @@
   hardware.enableAllFirmware = true;
 
   networking.hostName = "desktop"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -55,12 +55,6 @@
   # Enable the KDE plasma desktop environment
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -130,7 +124,7 @@
     # zsa
     pkgs.keymapp
     pkgs.git
-    # pkgs.helix
+    # diff tool
     pkgs.nvd
     # Language servers
     pkgs.nil
@@ -194,17 +188,6 @@
     "L+ /home/engson/.config/helix - - - - /home/engson/Dev/.workstation/.config/helix"
     "L+ /home/engson/.config/tmux - - - - /home/engson/Dev/.workstation/.config/tmux"
   ];
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

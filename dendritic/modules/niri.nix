@@ -1,8 +1,9 @@
+{ ... }:
 {
   flake.nixosModules.niri =
     {
       pkgs,
-      pkgs-unstable,
+      pkgsUnstable,
       ...
     }:
     {
@@ -10,7 +11,7 @@
       environment.systemPackages = [
 
         # Niri components
-        pkgs-unstable.waybar
+        pkgsUnstable.waybar
         pkgs.alacritty
         pkgs.fuzzel
         pkgs.swaylock
@@ -22,6 +23,7 @@
 
       systemd.tmpfiles.rules = [
         "L+ /home/engson/.config/niri - - - - /home/engson/Dev/.workstation/.config/niri"
+        "L+ /home/engson/.config/waybar - - - - /home/engson/Dev/.workstation/.config/waybar"
       ];
     };
 }
